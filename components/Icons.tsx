@@ -17,12 +17,12 @@ const base = (size: number, color: string) => ({
   strokeLinejoin: "round" as const,
 });
 
-export const WireMark = ({ size = 20, color = "var(--money)" }: P) => (
-  <svg {...base(size, color)} strokeWidth={1.7}>
-    <path d="M4 12h5" />
-    <path d="M15 12h5" />
-    <circle cx="11" cy="12" r="2" />
-    <path d="M13 12h0.5" />
+export const WireMark = ({ size = 17, color = "var(--money)" }: P) => (
+  <svg {...base(size, color)} strokeWidth={1.8}>
+    <path d="M2.5 12h5.5" />
+    <path d="M16 12h5.5" />
+    <circle cx="12" cy="12" r="3.4" />
+    <circle cx="12" cy="12" r="1.1" fill={color} stroke="none" />
   </svg>
 );
 
@@ -91,62 +91,62 @@ export const Person = ({ size = 15, color = "var(--ink)" }: P) => (
 /* --- app glyphs, drawn white inside a filled rounded square --- */
 
 export const DollarGlyph = ({ size = 11 }: P) => (
-  <svg {...base(size, "#fff")} strokeWidth={2.6}>
+  <svg {...base(size, "currentColor")} strokeWidth={2.6}>
     <path d="M12 4v16M8.5 7.5h6.5a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h6.5" />
   </svg>
 );
 
 export const CalendarGlyph = ({ size = 10 }: P) => (
-  <svg {...base(size, "#fff")} strokeWidth={2.6}>
+  <svg {...base(size, "currentColor")} strokeWidth={2.6}>
     <rect x="4" y="5" width="16" height="15" rx="2" />
     <path d="M4 10h16" />
   </svg>
 );
 
 export const MailGlyph = ({ size = 10 }: P) => (
-  <svg {...base(size, "#fff")} strokeWidth={2.6}>
+  <svg {...base(size, "currentColor")} strokeWidth={2.6}>
     <rect x="3" y="5.5" width="18" height="13" rx="2" />
     <path d="M3.5 7l8.5 6 8.5-6" />
   </svg>
 );
 
 export const BoxGlyph = ({ size = 10 }: P) => (
-  <svg {...base(size, "#fff")} strokeWidth={2.6}>
+  <svg {...base(size, "currentColor")} strokeWidth={2.6}>
     <path d="M3 8.5 12 4l9 4.5v7L12 20l-9-4.5z" />
     <path d="M3 8.5 12 13l9-4.5M12 13v7" />
   </svg>
 );
 
 export const ListGlyph = ({ size = 10 }: P) => (
-  <svg {...base(size, "#fff")} strokeWidth={2.6}>
+  <svg {...base(size, "currentColor")} strokeWidth={2.6}>
     <path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01" />
   </svg>
 );
 
 /* --- asset glyphs for the map --- */
 
-export const CardIcon = ({ size = 17, color = "var(--fainter)" }: P) => (
+export const CardIcon = ({ size = 17, color = "var(--faint)" }: P) => (
   <svg {...base(size, color)} strokeWidth={1.5}>
     <rect x="2" y="6" width="20" height="13" rx="2" />
     <path d="M2 10.5h20" />
   </svg>
 );
 
-export const CalendarIcon = ({ size = 17, color = "var(--fainter)" }: P) => (
+export const CalendarIcon = ({ size = 17, color = "var(--faint)" }: P) => (
   <svg {...base(size, color)} strokeWidth={1.5}>
     <rect x="3" y="5" width="18" height="16" rx="2" />
     <path d="M3 10h18M8 3v4M16 3v4" />
   </svg>
 );
 
-export const GlobeIcon = ({ size = 17, color = "var(--fainter)" }: P) => (
+export const GlobeIcon = ({ size = 17, color = "var(--faint)" }: P) => (
   <svg {...base(size, color)} strokeWidth={1.5}>
     <circle cx="12" cy="12" r="9" />
     <path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" />
   </svg>
 );
 
-export const ChatIcon = ({ size = 17, color = "var(--fainter)" }: P) => (
+export const ChatIcon = ({ size = 17, color = "var(--faint)" }: P) => (
   <svg {...base(size, color)} strokeWidth={1.5}>
     <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-4.2-1L3 20.5l1.7-4.6A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z" />
   </svg>

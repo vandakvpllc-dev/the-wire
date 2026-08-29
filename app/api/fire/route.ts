@@ -18,6 +18,13 @@ import { readAnswers, readCopy } from "@/lib/validate";
 
 const GAP_MS = 850;
 
+/**
+ * The stream deliberately takes about six seconds, which is uncomfortably close
+ * to the default serverless timeout. Give it room: a cut-off stream means the
+ * demo dies halfway through the one moment it exists for.
+ */
+export const maxDuration = 30;
+
 const enc = new TextEncoder();
 const sse = (e: FireEvent) => enc.encode(`data: ${JSON.stringify(e)}\n\n`);
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

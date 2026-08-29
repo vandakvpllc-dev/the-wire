@@ -1,44 +1,76 @@
+/* ==========================================================================
+   THE WIRE — design tokens
+
+   One rule governs the whole palette: money is the only colour. Everything
+   that is dead, disconnected or waiting is drawn in neutral graphite; the
+   instant money moves, it turns green. Nothing else in this product is
+   allowed to be chromatic, so green never has to compete for attention.
+
+   The ground is a near-black graphite rather than paper, because the product
+   is an instrument — a rail, a log, a phone — and instruments read on black.
+   Green on black is a live wire. Green on cream is a spreadsheet.
+   ========================================================================== */
+
 :root {
   /* ground */
-  --paper: #FBF9F6;
-  --card: #FFFFFF;
-  --sunk: #F5F2EE;
+  --void: #060807;
+  --paper: #0B0D0C;
+  --card: #101312;
+  --card-2: #161A19;
+  --sunk: #090B0A;
 
-  /* lines */
-  --line: #E7E2DA;
-  --line-soft: #EFEBE4;
-  --line-hard: #D8D2C8;
-  --dashed: #C9C3BA;
+  /* lines — all alpha, so they sit correctly on any surface above */
+  --line: rgba(255, 255, 255, 0.078);
+  --line-soft: rgba(255, 255, 255, 0.045);
+  --line-hard: rgba(255, 255, 255, 0.155);
+  --dashed: rgba(255, 255, 255, 0.19);
 
   /* ink */
-  --ink: #1B1A16;
-  --ink-2: #37342E;
-  --ink-3: #4A463F;
-  --muted: #6B655D;
-  --faint: #8C857C;
-  --fainter: #A8A199;
+  --ink: #F3F6F4;
+  --ink-2: #DBE0DD;
+  --ink-3: #B7BEBB;
+  --muted: #9BA29F;
+  --faint: #848B88;
+  --fainter: #6C7371;
 
   /* money — the only accent. grey when dead, green when money moves */
-  --money: #0B7A3E;
-  --money-bright: #14A05C;
-  --money-wash: #E9F5EE;
-  --money-wash-2: #F3FAF6;
-  --money-line: #B9DEC9;
+  --money: #34D17C;
+  --money-bright: #6BEAA8;
+  --money-deep: #0F8F52;
+  --money-ink: #04130A;
+  --money-wash: rgba(52, 209, 124, 0.1);
+  --money-wash-2: rgba(52, 209, 124, 0.05);
+  --money-line: rgba(52, 209, 124, 0.32);
+  --money-line-2: rgba(52, 209, 124, 0.55);
 
-  /* loss */
-  --loss: #B4442F;
-  --loss-wash: #FBEFEC;
-  --loss-line: #EDCFC7;
+  /* loss is not a colour. dead things are grey — that is the argument. */
+  --loss: #9CA3A0;
+  --loss-wash: rgba(255, 255, 255, 0.022);
+  --loss-line: rgba(255, 255, 255, 0.1);
 
-  --shadow-sm: 0 1px 2px rgba(27, 26, 22, 0.04);
-  --shadow-md: 0 3px 6px rgba(27, 26, 22, 0.05), 0 20px 46px rgba(27, 26, 22, 0.1);
-  --shadow-money: 0 2px 4px rgba(11, 122, 62, 0.16), 0 10px 26px rgba(11, 122, 62, 0.14);
+  /* the single functional exception: an inline form error must read as a
+     problem, so it gets a low-chroma clay that cannot be mistaken for money */
+  --alert: #D6A38C;
 
-  --serif: var(--font-serif), Georgia, "Times New Roman", serif;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.4), 0 24px 60px -22px rgba(0, 0, 0, 0.85);
+  --shadow-lg: 0 4px 14px rgba(0, 0, 0, 0.45), 0 48px 110px -32px rgba(0, 0, 0, 0.95);
+  --shadow-money: 0 0 0 1px var(--money-line), 0 20px 50px -20px rgba(52, 209, 124, 0.45);
+
+  /* the light-catching top edge that makes a surface read as raised */
+  --edge: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  --edge-strong: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  --r-sm: 6px;
+  --r: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+
+  --serif: var(--font-serif), "Iowan Old Style", Georgia, serif;
   --sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 *,
@@ -53,14 +85,51 @@ body {
   padding: 0;
 }
 
-body {
+html {
   background: var(--paper);
+}
+
+body {
+  min-height: 100dvh;
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+
+  /* a drafting grid, barely there — the wiring diagram the demo is about */
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.016) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.016) 1px, transparent 1px);
+  background-size: 36px 36px, 36px 36px;
+  background-position: center top;
+}
+
+/* one soft light source from above, and a floor that falls away */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(110% 62% at 50% -12%, rgba(255, 255, 255, 0.05), transparent 62%),
+    radial-gradient(90% 55% at 50% 112%, rgba(0, 0, 0, 0.55), transparent 60%);
+}
+
+/* film grain — 3%, enough to kill the plastic flatness of a flat black */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 img {
@@ -86,14 +155,59 @@ input {
 
 a {
   color: var(--money);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 a:hover {
   color: var(--money-bright);
 }
 
+::selection {
+  background: rgba(52, 209, 124, 0.3);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--money);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* dark autofill, or Chrome paints a 1998 yellow rectangle over the design */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0 1000px #14201A inset;
+  caret-color: var(--ink);
+  transition: background-color 9999s ease-out;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+  background-clip: content-box;
+}
+
 .mono {
   font-family: var(--mono);
+  font-feature-settings: "kern" 1;
 }
 
 .serif {
@@ -101,18 +215,34 @@ a:hover {
   font-weight: 400;
 }
 
+.italic {
+  font-style: italic;
+}
+
 /* the demo runs long-form; never let a wide row scroll the page */
 .scroll-x {
   overflow-x: auto;
 }
 
+/* ------------------------------------------------------------------ motion */
+
 @keyframes livePulse {
   0%,
   100% {
-    opacity: 0.4;
+    opacity: 0.35;
   }
   50% {
     opacity: 1;
+  }
+}
+
+@keyframes nodePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 209, 124, 0.42), 0 0 14px 2px rgba(52, 209, 124, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgba(52, 209, 124, 0), 0 0 18px 4px rgba(52, 209, 124, 0.28);
   }
 }
 
@@ -130,7 +260,18 @@ a:hover {
 @keyframes riseIn {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes screenIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -141,19 +282,32 @@ a:hover {
 @keyframes moneyLand {
   0% {
     opacity: 0;
-    transform: translateY(-14px) scale(0.97);
+    transform: translateY(-16px) scale(0.96);
+    filter: blur(4px);
   }
   60% {
-    transform: translateY(2px) scale(1.01);
+    transform: translateY(2px) scale(1.008);
+    filter: blur(0);
   }
   100% {
     opacity: 1;
     transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes markFlicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
   }
 }
 
 .pulse {
-  animation: livePulse 1.4s ease-in-out infinite;
+  animation: livePulse 1.5s ease-in-out infinite;
 }
 
 .caret {
@@ -161,18 +315,28 @@ a:hover {
 }
 
 .rise {
-  animation: riseIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: riseIn 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .land {
-  animation: moneyLand 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: moneyLand 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.enter {
+  animation: screenIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .pulse,
   .caret,
   .rise,
-  .land {
-    animation: none;
+  .land,
+  .enter,
+  .dot.now {
+    animation: none !important;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
   }
 }

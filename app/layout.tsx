@@ -13,6 +13,7 @@ const archivo = Archivo({
 const serif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
+  style: ["normal", "italic"],
   variable: "--font-serif",
   display: "swap",
 });
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#FBF9F6",
+  themeColor: "#0B0D0C",
 };
 
 export default function RootLayout({

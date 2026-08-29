@@ -23,10 +23,7 @@ function Glyph({ kind }: { kind: ActKind }) {
 
 function Icon({ kind }: { kind: ActKind | "money" }) {
   return (
-    <span
-      className="appIcon"
-      style={{ background: kind === "money" ? "var(--money)" : "#C4BDB3" }}
-    >
+    <span className={kind === "money" ? "appIcon moneyIcon" : "appIcon"}>
       {kind === "money" ? <DollarGlyph /> : <Glyph kind={kind} />}
     </span>
   );
@@ -85,7 +82,7 @@ export function Phone(s: PhoneState) {
       {s.queued && (
         <div className="notif waiting rise">
           <div className="notifHead">
-            <Clock size={13} color="var(--fainter)" />
+            <Clock size={13} color="var(--faint)" />
             <span style={{ color: "var(--faint)" }}>Waiting</span>
             <span className="notifWhen">Wed 9:00 AM</span>
           </div>
@@ -95,20 +92,7 @@ export function Phone(s: PhoneState) {
         </div>
       )}
 
-      <div
-        style={{
-          marginTop: "auto",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 4,
-          paddingTop: 14,
-          paddingBottom: 6,
-          textAlign: "center",
-        }}
-      >
-        {s.footer}
-      </div>
+      <div className="notifFoot">{s.footer}</div>
     </div>
   );
 }

@@ -23,15 +23,25 @@ export function Rail({
     -1,
   );
 
-  // The grid spans the full width, so the centre of column i sits at
-  // (i + 0.5) / 5 of it. The track itself starts 8% in, so the fill has to be
-  // measured from there — not from zero.
-  const fill = lastOn < 0 ? 0 : (lastOn + 0.5) * 20 - 8;
-
+  // The fill has to stop dead on a station node. Node i is centred in grid
+  // column i, so its position depends on the column gap as well as the width —
+  // the arithmetic lives in CSS (see --rail-col), and all it needs from here
+  // is which node to stop at.
   return (
     <div className="rail">
       <div className="railLine" />
-      <div className="railFill" style={{ width: `${fill}%` }} />
+      <div
+        className="railFill"
+        /* the comet head is the leading edge of a pulse in motion — once the
+           whole run is complete there is nothing left to lead */
+        data-complete={lastOn === PARTS.length - 1 && !now ? "" : undefined}
+        style={
+          {
+            "--i": Math.max(lastOn, 0),
+            opacity: lastOn < 0 ? 0 : 1,
+          } as React.CSSProperties
+        }
+      />
       <div className="railGrid">
         {PARTS.map((p, i) => {
           const on = done.has(p.id);

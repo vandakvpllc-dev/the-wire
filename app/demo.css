@@ -1,6 +1,15 @@
+/* ==========================================================================
+   THE WIRE — screen composition
+
+   Five screens, one chassis. The rail and the five-slot strip stay five
+   across at every width because the shape of that row is the teaching.
+   ========================================================================== */
+
 /* ------------------------------------------------------------------ shell */
 
 .screen {
+  position: relative;
+  z-index: 1;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -8,9 +17,9 @@
 
 .wrap {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 26px clamp(18px, 3.4vw, 48px) clamp(28px, 4vw, 44px);
+  padding: 0 clamp(18px, 3.6vw, 56px) clamp(36px, 4vw, 56px);
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -22,23 +31,93 @@
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+  padding: 22px 0 18px;
+  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: clamp(24px, 3vw, 40px);
 }
 
 .mark {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 11px;
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.22em;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  color: var(--ink);
+}
+
+.markBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  box-shadow: var(--edge);
+  flex-shrink: 0;
+}
+
+.headRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
 }
 
 .stepLabel {
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
+  font-size: 10px;
+  letter-spacing: 0.2em;
   color: var(--fainter);
   text-align: right;
+  white-space: nowrap;
+}
+
+/* five ticks for five screens — neutral, never green. green is money only. */
+.ticks {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.tick {
+  width: 18px;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.4s ease;
+}
+
+.tick.on {
+  background: var(--ink-3);
+}
+
+.livePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--money);
+  background: var(--money-wash);
+  border: 1px solid var(--money-line);
+  border-radius: 99px;
+  padding: 5px 11px 5px 9px;
+  white-space: nowrap;
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--money);
+  box-shadow: 0 0 8px 1px rgba(52, 209, 124, 0.7);
+  flex-shrink: 0;
 }
 
 .live {
@@ -48,31 +127,63 @@
   color: var(--money);
 }
 
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.body > .stack,
+.body > .formSplit {
+  flex: 1;
+}
+
+/* the opening screen is a composition, not a document — it sits in the middle
+   of whatever room the viewport gives it */
+.body > .formSplit {
+  align-content: center;
+}
+
 /* --------------------------------------------------------------- typography */
 
 .h1 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(34px, 5.1vw, 58px);
-  line-height: 1.02;
-  letter-spacing: -0.01em;
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.022em;
+  color: var(--ink);
   margin: 0;
+  text-wrap: balance;
 }
 
 .h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(26px, 3vw, 38px);
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  font-size: clamp(28px, 3.7vw, 46px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(22px, 2.1vw, 28px);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  color: var(--ink);
   margin: 0;
 }
 
 .lede {
-  font-size: clamp(14px, 1.15vw, 15px);
+  font-size: clamp(15.5px, 1.15vw, 17px);
   color: var(--muted);
-  line-height: 1.55;
-  max-width: 68ch;
+  line-height: 1.62;
+  max-width: 62ch;
   text-wrap: pretty;
   margin: 0;
 }
@@ -80,13 +191,52 @@
 .eyebrow {
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.18em;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--faint);
+}
+
+.t-body {
+  font-size: 15px;
+  color: var(--ink-3);
+  line-height: 1.6;
+}
+
+.t-sm {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.t-xs {
+  font-size: 12px;
+  color: var(--faint);
+  line-height: 1.5;
+}
+
+.t-lab {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   color: var(--fainter);
 }
 
 .stack {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+}
+
+/* a hairline that fades out — reads as drawn, not as a divider component */
+.rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--line-hard), transparent);
+}
+
+.ruleMoney {
+  height: 1px;
+  background: linear-gradient(90deg, var(--money-line-2), transparent);
 }
 
 /* ------------------------------------------------------------------- form */
@@ -94,47 +244,81 @@
 .formGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 15px;
+  gap: 14px 18px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 8px;
+  min-width: 0;
 }
 
 .field > label {
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.16em;
-  color: var(--fainter);
+  font-weight: 500;
+  letter-spacing: 0.17em;
+  color: var(--faint);
 }
 
 .field input {
-  background: var(--card);
+  background: rgba(255, 255, 255, 0.032);
   border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 14px 16px;
+  border-radius: var(--r);
+  padding: 14px 15px;
   font-size: 16px; /* 16px keeps iOS from zooming the page on focus */
-  box-shadow: var(--shadow-sm);
+  color: var(--ink);
+  box-shadow: var(--edge);
   width: 100%;
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.field input::placeholder {
+  color: var(--fainter);
+}
+
+.field input:hover {
+  border-color: rgba(255, 255, 255, 0.13);
 }
 
 .field input:focus {
-  border-color: var(--ink);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: var(--edge), 0 0 0 4px rgba(255, 255, 255, 0.05);
 }
 
+/* the price is the number the entire demo runs on. it gets typeset like one. */
 .field.moneyField > label {
   color: var(--money);
 }
 
 .field.moneyField input {
-  border: 1.5px solid var(--money);
-  padding: 13px 16px;
-  font-weight: 600;
-  box-shadow: 0 1px 2px rgba(11, 122, 62, 0.08);
+  border-color: var(--money-line);
+  background: var(--money-wash-2);
+  font-family: var(--mono);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--money);
+  padding: 11px 15px;
+  box-shadow: var(--edge), 0 0 26px -14px rgba(52, 209, 124, 0.8);
+}
+
+.field.moneyField input::placeholder {
+  color: rgba(52, 209, 124, 0.34);
+}
+
+.field.moneyField input:hover {
+  border-color: rgba(52, 209, 124, 0.48);
+}
+
+.field.moneyField input:focus {
+  border-color: var(--money);
+  background: var(--money-wash);
+  box-shadow: var(--edge), 0 0 0 4px rgba(52, 209, 124, 0.14),
+    0 0 34px -12px rgba(52, 209, 124, 0.9);
 }
 
 .field.moneyField .withSign {
@@ -143,53 +327,77 @@
 
 .field.moneyField .withSign span {
   position: absolute;
-  left: 16px;
+  left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--money);
-  font-weight: 600;
+  font-family: var(--mono);
+  font-size: 19px;
+  color: rgba(52, 209, 124, 0.62);
+  font-weight: 500;
   pointer-events: none;
 }
 
 .field.moneyField .withSign input {
-  padding-left: 30px;
+  padding-left: 28px;
 }
 
 .field .err {
   font-size: 12px;
-  color: var(--loss);
+  color: var(--alert);
 }
 
 /* ---------------------------------------------------------------- buttons */
 
 .go {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: var(--money);
-  color: #fff;
-  border-radius: 4px;
-  padding: 16px 28px;
+  background: linear-gradient(180deg, var(--money-bright), var(--money));
+  color: var(--money-ink);
+  border-radius: var(--r);
+  padding: 0 24px;
   font-size: 15px;
   font-weight: 600;
-  box-shadow: var(--shadow-money);
-  transition: transform 0.12s, filter 0.12s;
+  letter-spacing: -0.005em;
   min-height: 52px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 16px 42px -16px rgba(52, 209, 124, 0.75);
+  transition: transform 0.16s ease, box-shadow 0.2s ease, filter 0.16s ease;
+  white-space: nowrap;
+}
+
+.go svg {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .go:hover {
-  filter: brightness(1.06);
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 22px 54px -16px rgba(52, 209, 124, 0.9);
+}
+
+.go:hover svg {
+  transform: translateX(3px);
 }
 
 .go:active {
-  transform: translateY(1px);
+  transform: translateY(0);
+  filter: brightness(0.97);
 }
 
 .go[disabled] {
-  opacity: 0.55;
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--fainter);
   cursor: default;
   filter: none;
   transform: none;
+  box-shadow: var(--edge);
 }
 
 .ghost {
@@ -197,64 +405,126 @@
   align-items: center;
   gap: 10px;
   border: 1px solid var(--line-hard);
-  border-radius: 4px;
-  padding: 14px 22px;
+  border-radius: var(--r);
+  padding: 0 20px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--muted);
+  color: var(--ink-3);
   min-height: 48px;
+  transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease;
 }
 
 .ghost:hover {
-  border-color: var(--ink);
+  border-color: rgba(255, 255, 255, 0.3);
   color: var(--ink);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 /* ------------------------------------------------------------------ cards */
 
 .card {
-  background: var(--card);
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.008)),
+    var(--card);
   border: 1px solid var(--line);
-  border-radius: 4px;
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--r-lg);
+  box-shadow: var(--edge), var(--shadow-sm);
 }
 
+/* a surface that has been pressed into the page — logs, panels, reveals */
+.cardSunk {
+  position: relative;
+  background: var(--sunk);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-lg);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* disconnected. no light on it, nothing holding it to anything. */
+.cardDead {
+  position: relative;
+  background: rgba(255, 255, 255, 0.012);
+  border: 1px dashed var(--line-hard);
+  border-radius: var(--r-lg);
+  transition: border-color 0.2s ease;
+}
+
+/* money moved through here */
 .cardMoney {
-  background: var(--card);
-  border: 1.5px solid var(--money);
-  border-radius: 4px;
-  box-shadow: 0 3px 6px rgba(11, 122, 62, 0.08), 0 20px 46px rgba(11, 122, 62, 0.1);
+  position: relative;
+  background: linear-gradient(180deg, rgba(52, 209, 124, 0.085), rgba(52, 209, 124, 0.015)),
+    var(--card);
+  border: 1px solid var(--money-line);
+  border-radius: var(--r-lg);
+  box-shadow: inset 0 1px 0 rgba(107, 234, 168, 0.16),
+    0 24px 60px -28px rgba(52, 209, 124, 0.6);
 }
 
 /* ------------------------------------------------------------------- rail */
 
 .rail {
   position: relative;
+  padding: 4px 0 2px;
+
+  /* the fill has to land exactly on a station node, and the nodes are centred
+     in grid columns — so the gap is part of the arithmetic, not decoration */
+  --rail-gap: clamp(6px, 1.6vw, 26px);
+  --rail-col: calc((100% - 4 * var(--rail-gap)) / 5);
+  /* the wire runs node to node, so it starts at the centre of column one */
+  --rail-inset: calc(var(--rail-col) / 2);
 }
 
 .railLine,
 .railFill {
   position: absolute;
-  top: 19px;
+  top: 23px;
   height: 2px;
+  border-radius: 2px;
 }
 
+/* an unconnected run of wire is drawn, not filled */
 .railLine {
-  left: 8%;
-  right: 8%;
-  background: var(--line-hard);
+  left: var(--rail-inset);
+  right: var(--rail-inset);
+  background-image: linear-gradient(
+    90deg,
+    var(--line-hard) 0 6px,
+    transparent 6px 12px
+  );
+  background-size: 12px 2px;
+  background-repeat: repeat-x;
 }
 
 .railFill {
-  left: 8%;
-  background: linear-gradient(90deg, var(--money), var(--money-bright));
-  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  left: var(--rail-inset);
+  width: calc(var(--i, 0) * (var(--rail-col) + var(--rail-gap)));
+  background: linear-gradient(90deg, var(--money-deep), var(--money) 55%, var(--money-bright));
+  box-shadow: 0 0 18px -2px rgba(52, 209, 124, 0.65);
+  transition: width 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+}
+
+/* the leading edge of the pulse */
+.railFill[data-complete]::after {
+  display: none;
+}
+
+.railFill::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--money-bright);
+  box-shadow: 0 0 14px 3px rgba(107, 234, 168, 0.75);
 }
 
 .railGrid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: clamp(8px, 1.6vw, 26px);
+  gap: var(--rail-gap);
   position: relative;
 }
 
@@ -264,35 +534,40 @@
   align-items: center;
   gap: 13px;
   text-align: center;
+  min-width: 0;
 }
 
 .dot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  margin-top: 13px;
+  margin-top: 17px;
   background: var(--paper);
-  border: 2px solid var(--dashed);
+  border: 2px solid var(--line-hard);
   box-sizing: border-box;
-  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  flex-shrink: 0;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .dot.on {
   background: var(--money);
   border-color: var(--money);
+  box-shadow: 0 0 12px 1px rgba(52, 209, 124, 0.45);
 }
 
 .dot.now {
   background: var(--money-bright);
   border-color: var(--money-bright);
-  box-shadow: 0 0 0 7px rgba(11, 122, 62, 0.16);
+  animation: nodePulse 1.5s ease-out infinite;
 }
 
 .stationName {
   font-family: var(--mono);
   font-size: clamp(9px, 1vw, 11.5px);
+  font-weight: 500;
   letter-spacing: 0.14em;
-  color: var(--faint);
+  color: var(--fainter);
+  transition: color 0.35s ease;
 }
 
 .stationName.on {
@@ -302,67 +577,160 @@
 .stationSub {
   font-family: var(--mono);
   font-size: clamp(8.5px, 0.85vw, 10.5px);
-  color: var(--fainter);
+  color: var(--faint);
 }
 
 /* ---------------------------------------------------------------- console */
 
+.console {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.consoleBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, 0.018);
+  flex-wrap: wrap;
+}
+
+.consoleBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 12px 18px;
+  min-height: 268px;
+}
+
+.consoleFoot {
+  margin-top: auto;
+  border-top: 1px solid var(--line-soft);
+  padding: 15px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.014);
+}
+
 .logRow {
   display: grid;
-  grid-template-columns: 74px 70px minmax(0, 1fr);
+  grid-template-columns: 62px 68px minmax(0, 1fr);
   gap: 14px;
   align-items: baseline;
   font-family: var(--mono);
+  padding: 10px 10px 10px 12px;
+  border-radius: 7px;
+  border-left: 2px solid transparent;
+  position: relative;
+}
+
+.logRow:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.016);
+}
+
+.logRow.hot {
+  border-left-color: var(--money);
+  background: var(--money-wash-2);
 }
 
 .logTime {
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--fainter);
+  font-variant-numeric: tabular-nums;
 }
 
 .logPart {
-  font-size: 11.5px;
+  font-size: 10px;
+  font-weight: 500;
   color: var(--money);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.13em;
 }
 
 .logText {
   font-size: 12.5px;
   color: var(--ink-2);
+  line-height: 1.5;
   overflow-wrap: anywhere;
 }
 
 /* ------------------------------------------------------------------ phone */
 
-.phone {
-  width: min(292px, 100%);
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  padding: 38px 14px 16px;
+.phoneCol {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: var(--shadow-md);
 }
 
+/* the light the device sits in */
+.phoneStage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 4px;
+}
+
+.phoneStage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  width: 78%;
+  height: 76%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(52, 209, 124, 0.16), transparent 72%);
+  filter: blur(26px);
+  pointer-events: none;
+}
+
+.phone {
+  position: relative;
+  width: min(296px, 100%);
+  background: linear-gradient(180deg, #16191A 0%, #0D100F 42%, #0A0C0B 100%);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 34px;
+  padding: 34px 13px 15px;
+  min-height: 452px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+    var(--shadow-lg);
+}
+
+/* real notifications are frosted slabs floating on the wallpaper */
 .notif {
-  background: var(--sunk);
-  border-radius: 14px;
-  padding: 13px 15px;
+  background: rgba(255, 255, 255, 0.075);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 17px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.8);
 }
 
 .notif.money {
-  background: var(--money-wash);
-  border: 1px solid var(--money-line);
+  background: linear-gradient(180deg, rgba(52, 209, 124, 0.2), rgba(52, 209, 124, 0.09));
+  border-color: var(--money-line-2);
+  box-shadow: 0 0 0 1px rgba(52, 209, 124, 0.14),
+    0 14px 34px -12px rgba(52, 209, 124, 0.55);
 }
 
 .notif.waiting {
-  background: var(--paper);
-  border: 1px dashed var(--dashed);
+  background: rgba(255, 255, 255, 0.022);
+  border: 1px dashed var(--line-hard);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
 }
 
 .notifHead {
@@ -370,38 +738,60 @@
   align-items: center;
   gap: 8px;
   font-size: 11px;
-  color: var(--muted);
+  color: var(--ink-3);
+  letter-spacing: 0.01em;
 }
 
 .notifWhen {
   font-family: var(--mono);
-  font-size: 10px;
-  color: var(--fainter);
+  font-size: 9.5px;
+  color: var(--faint);
   margin-left: auto;
 }
 
 .notifAmount {
   font-family: var(--mono);
-  font-size: 27px;
-  color: var(--money);
+  font-size: 28px;
+  color: var(--money-bright);
   font-weight: 500;
-  line-height: 1;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-shadow: 0 0 22px rgba(52, 209, 124, 0.5);
+  font-variant-numeric: tabular-nums;
 }
 
 .notifBody {
   font-size: 12.5px;
   color: var(--ink-2);
-  line-height: 1.4;
+  line-height: 1.45;
+}
+
+.notifFoot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 15px 6px 6px;
+  text-align: center;
 }
 
 .appIcon {
-  width: 17px;
-  height: 17px;
-  border-radius: 5px;
+  width: 19px;
+  height: 19px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--ink);
+}
+
+.appIcon.moneyIcon {
+  background: linear-gradient(180deg, var(--money-bright), var(--money));
+  color: var(--money-ink);
+  box-shadow: 0 0 12px -2px rgba(52, 209, 124, 0.9);
 }
 
 /* ------------------------------------------------------------------- grids */
@@ -409,12 +799,12 @@
 .two {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(16px, 2.2vw, 30px);
+  gap: clamp(16px, 2.2vw, 28px);
 }
 
 .assetGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
   gap: 12px;
 }
 
@@ -425,8 +815,8 @@
 
 .revealGrid {
   display: grid;
-  grid-template-columns: minmax(280px, 468px) minmax(0, 1fr);
-  gap: clamp(20px, 3vw, 40px);
+  grid-template-columns: minmax(280px, 480px) minmax(0, 1fr);
+  gap: clamp(22px, 3.4vw, 48px);
   align-items: center;
 }
 
@@ -439,25 +829,28 @@
 }
 
 .slot {
-  border: 1px dashed var(--dashed);
-  border-radius: 3px;
-  padding: clamp(10px, 1.4vw, 14px) 4px;
+  border: 1px dashed var(--line-hard);
+  border-radius: 8px;
+  padding: clamp(12px, 1.5vw, 17px) 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   text-align: center;
   min-width: 0;
 }
 
 .slot.ai {
-  border: 1.5px solid var(--money);
-  background: var(--money-wash);
+  border: 1px solid var(--money-line-2);
+  background: linear-gradient(180deg, rgba(52, 209, 124, 0.14), rgba(52, 209, 124, 0.03));
+  box-shadow: 0 0 0 1px rgba(52, 209, 124, 0.08),
+    0 16px 36px -18px rgba(52, 209, 124, 0.75);
 }
 
 .slotName {
   font-family: var(--mono);
   font-size: clamp(6.5px, 1.5vw, 9px);
+  font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--fainter);
 }
@@ -470,6 +863,7 @@
   font-size: clamp(11px, 2vw, 14px);
   font-weight: 600;
   color: var(--faint);
+  letter-spacing: -0.01em;
 }
 
 .slot.ai .slotWho {
@@ -479,49 +873,288 @@
 .five {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: clamp(12px, 2vw, 30px);
+  gap: clamp(10px, 1.4vw, 16px);
+}
+
+/* one of the five parts, on the anatomy screen */
+.partCard {
+  padding: 18px 17px 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  min-width: 0;
+}
+
+.partTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.partNum {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--fainter);
+  font-variant-numeric: tabular-nums;
+}
+
+.cardMoney .partNum {
+  color: var(--money);
+}
+
+.partIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: var(--edge);
+  flex-shrink: 0;
+}
+
+.cardMoney .partIcon {
+  border-color: var(--money-line);
+  background: rgba(52, 209, 124, 0.1);
+}
+
+.partName {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+}
+
+.partText {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.58;
+  flex-grow: 1;
+}
+
+.partTool {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--fainter);
 }
 
 .liveSplit {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 306px;
+  grid-template-columns: minmax(0, 1fr) 312px;
   gap: clamp(20px, 3vw, 44px);
-  align-items: start;
+  align-items: stretch;
 }
 
 .formSplit {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 452px;
-  gap: clamp(24px, 4vw, 68px);
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: clamp(28px, 4vw, 64px);
   align-items: start;
 }
 
 .stats {
   display: flex;
-  gap: clamp(20px, 3vw, 34px);
+  gap: clamp(18px, 2.6vw, 32px);
   flex-wrap: wrap;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
+  min-width: 0;
 }
 
 .statNum {
   font-family: var(--mono);
-  font-size: clamp(22px, 2.4vw, 30px);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 400;
   line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.statNum.xl {
+  font-size: clamp(46px, 6vw, 74px);
+  letter-spacing: -0.045em;
+  font-feature-settings: "zero" 1;
 }
 
 .statLabel {
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.14em;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   color: var(--fainter);
 }
 
+.statMoney {
+  border-left: 2px solid var(--money);
+  padding-left: 16px;
+}
+
+.statMoney .statNum {
+  color: var(--money);
+  text-shadow: 0 0 24px rgba(52, 209, 124, 0.4);
+}
+
+.statMoney .statLabel {
+  color: var(--money);
+}
+
+/* ------------------------------------------------------- proof: two worlds */
+
+.worldDead {
+  padding: 24px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.worldLive {
+  padding: 24px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.stepRow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 1px dashed var(--line-hard);
+  border-radius: 8px;
+  padding: 11px 14px;
+  min-width: 0;
+}
+
+.stepRow.isLive {
+  border: 1px solid var(--money-line);
+  background: var(--money-wash-2);
+}
+
+.stepRow.isAi {
+  border-style: solid;
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.stepWho {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  width: 26px;
+  flex-shrink: 0;
+  color: var(--fainter);
+}
+
+.stepRow.isLive .stepWho {
+  color: var(--money);
+}
+
+.stepRow.isAi .stepWho {
+  color: var(--ink-3);
+}
+
+.stepText {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--faint);
+}
+
+.stepRow.isLive .stepText,
+.stepRow.isAi .stepText {
+  color: var(--ink-2);
+}
+
+.ledger {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
+  gap: clamp(18px, 2.4vw, 30px);
+  padding: 24px 26px;
+  align-items: center;
+}
+
+.ledgerCell {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border-left: 1px solid var(--line);
+  padding-left: 20px;
+  min-width: 0;
+}
+
+.ledgerCell.money {
+  border-left: 2px solid var(--money);
+}
+
+.ledgerNum {
+  font-family: var(--mono);
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ledgerNum.dead {
+  color: var(--faint);
+}
+
+.ledgerNum.win {
+  color: var(--money);
+  font-weight: 500;
+  text-shadow: 0 0 26px rgba(52, 209, 124, 0.45);
+}
+
+/* ---------------------------------------------------------- shared blocks */
+
+/* headline on the left, the one button on the right */
+.closer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 48px);
+  flex-wrap: wrap;
+}
+
+.noteBox {
+  background: var(--loss-wash);
+  border: 1px solid var(--loss-line);
+  border-left: 2px solid var(--line-hard);
+  border-radius: var(--r);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wiringNote {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-left: 2px solid var(--money);
+  padding-left: 20px;
+  min-width: 240px;
+}
+
 /* ------------------------------------------------------------ breakpoints */
+
+@media (max-width: 1120px) {
+  .five {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 
 @media (max-width: 1040px) {
   .liveSplit,
@@ -530,17 +1163,22 @@
   }
 
   .phoneCol {
-    display: flex;
-    justify-content: center;
-  }
-
-  .five {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
   }
 
   /* The rail is the teaching device — it stays five-across at every width. */
   .railGrid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .five {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .revealGrid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -559,8 +1197,8 @@
   }
 
   .logRow {
-    grid-template-columns: 62px minmax(0, 1fr);
-    row-gap: 2px;
+    grid-template-columns: 58px minmax(0, 1fr);
+    row-gap: 3px;
   }
 
   .logPart {
@@ -571,20 +1209,68 @@
     grid-column: 2;
   }
 
-  .railLine,
-  .railFill {
-    left: 10%;
-  }
-
-  .railLine {
-    right: 10%;
-  }
-
   .stationSub {
     display: none;
   }
 
   .stepLabel {
     display: none;
+  }
+
+  .head {
+    padding: 16px 0 14px;
+  }
+
+  .ledger {
+    padding: 20px 20px;
+  }
+
+  .ledgerCell {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+    padding-top: 14px;
+  }
+
+  .ledgerCell.money {
+    border-left: none;
+    border-top: 2px solid var(--money);
+  }
+
+  .worldDead,
+  .worldLive {
+    padding: 20px 18px;
+  }
+
+  .consoleBody {
+    padding: 12px 8px 16px;
+    min-height: 220px;
+  }
+
+  /* the bar is one line or it isn't a bar */
+  .consoleBar {
+    padding: 12px 16px;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .consoleBar > span {
+    font-size: 9px !important;
+    letter-spacing: 0.16em !important;
+    white-space: nowrap;
+  }
+
+  .wiringNote {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .stats {
+    gap: 16px;
+  }
+
+  .statMoney {
+    padding-left: 12px;
   }
 }

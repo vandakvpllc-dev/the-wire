@@ -16,17 +16,28 @@ export function Shell({
       <div className="wrap">
         <header className="head">
           <div className="mark">
-            <WireMark />
+            <span className="markBadge">
+              <WireMark />
+            </span>
             <span>THE WIRE</span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            {live && <span className="live pulse">● LIVE</span>}
-            <span className="stepLabel">
-              STEP {step} OF 5 — {label}
-            </span>
+          <div className="headRight">
+            {live && (
+              <span className="livePill">
+                <i className="liveDot pulse" />
+                LIVE
+              </span>
+            )}
+            {/* five ticks for five screens — the shape of the product, twice */}
+            <div className="ticks" role="presentation" aria-hidden="true">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <span key={n} className={n <= step ? "tick on" : "tick"} />
+              ))}
+            </div>
+            <span className="stepLabel">{label}</span>
           </div>
         </header>
-        {children}
+        <main className="body enter">{children}</main>
       </div>
     </div>
   );

@@ -16,7 +16,14 @@ function DeadPort() {
         strokeDasharray="4 5"
         strokeLinecap="round"
       />
-      <circle cx="40" cy="6" r="3.5" fill="var(--paper)" stroke="var(--dashed)" strokeWidth="1.5" />
+      <circle
+        cx="40"
+        cy="6"
+        r="3.5"
+        fill="none"
+        stroke="var(--dashed)"
+        strokeWidth="1.5"
+      />
     </svg>
   );
 }
@@ -38,37 +45,38 @@ function Asset({
 }) {
   return (
     <div
-      className="card"
+      className="cardDead"
       style={{
-        padding: "16px 17px",
+        padding: "17px 18px 18px",
         display: "flex",
         flexDirection: "column",
-        gap: 6,
-        borderColor: loss ? "var(--loss-line)" : undefined,
+        gap: 7,
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
         {icon}
-        <span
-          className="mono"
-          style={{ fontSize: 9.5, letterSpacing: "0.14em", color: "var(--fainter)" }}
-        >
-          {kind}
-        </span>
+        <span className="t-lab">{kind}</span>
         {badge && (
           <span
             className="mono"
-            style={{ fontSize: 11, color: "var(--money)", marginLeft: "auto" }}
+            style={{
+              fontSize: 11,
+              color: "var(--money)",
+              marginLeft: "auto",
+              fontWeight: 500,
+            }}
           >
             {badge}
           </span>
         )}
-        <span style={{ marginLeft: badge ? 8 : "auto" }}>
+        <span style={{ marginLeft: badge ? 8 : "auto", display: "flex" }}>
           <DeadPort />
         </span>
       </div>
-      <span style={{ fontSize: 14, fontWeight: 600 }}>{title}</span>
-      <span style={{ fontSize: 12, color: loss ? "var(--loss)" : "var(--faint)" }}>{under}</span>
+      <span style={{ fontSize: 15, fontWeight: 600, color: "var(--ink-2)" }}>{title}</span>
+      <span style={{ fontSize: 12.5, color: loss ? "var(--loss)" : "var(--faint)" }}>
+        {under}
+      </span>
     </div>
   );
 }
@@ -78,8 +86,8 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
 
   return (
     <Shell step={2} label="WHAT YOU HAVE NOW">
-      <div className="stack" style={{ gap: "clamp(24px, 3vw, 34px)", paddingTop: 30 }}>
-        <div className="stack" style={{ gap: 14 }}>
+      <div className="stack" style={{ gap: "clamp(22px, 2.8vw, 34px)" }}>
+        <div className="stack" style={{ gap: 18 }}>
           <span className="eyebrow">
             {a.firstName.toUpperCase()}, HERE&rsquo;S WHAT YOU ALREADY OWN
           </span>
@@ -112,55 +120,61 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
               under="You answer. At 11pm. Yourself."
             />
 
+            {/* the one solid, lit object on this screen — because it is the
+                only thing on it that actually connects anything */}
             <div
               className="card spanTwo"
               style={{
-                padding: "17px 19px",
+                padding: "18px 20px 20px",
                 display: "flex",
                 flexDirection: "column",
-                gap: 7,
-                border: "1.5px solid var(--ink)",
-                boxShadow: "var(--shadow-md)",
+                gap: 8,
+                borderColor: "var(--line-hard)",
+                boxShadow: "var(--edge-strong), var(--shadow-md)",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 2 }}>
                 <Person />
                 <span
                   className="mono"
-                  style={{ fontSize: 9.5, letterSpacing: "0.14em" }}
+                  style={{
+                    fontSize: 9.5,
+                    fontWeight: 500,
+                    letterSpacing: "0.2em",
+                    color: "var(--ink-3)",
+                  }}
                 >
                   THE ONLY WIRE IN THIS PICTURE
                 </span>
               </div>
-              <span style={{ fontSize: 21, fontWeight: 600 }}>{a.firstName}</span>
-              <span style={{ fontSize: 12.5, color: "var(--muted)", lineHeight: 1.5 }}>
+              <span
+                className="serif"
+                style={{ fontSize: 30, lineHeight: 1.05, letterSpacing: "-0.02em" }}
+              >
+                {a.firstName}
+              </span>
+              <span className="t-sm">
                 Copying, pasting and remembering, by hand, every single time — and only
                 while awake.
               </span>
             </div>
 
             <div
-              className="spanTwo"
+              className="cardDead spanTwo"
               style={{
-                background: "var(--sunk)",
-                border: "1px dashed var(--dashed)",
-                borderRadius: 4,
-                padding: "16px 17px",
+                padding: "17px 18px 18px",
                 display: "flex",
                 flexDirection: "column",
-                gap: 6,
+                gap: 7,
               }}
             >
-              <span
-                className="mono"
-                style={{ fontSize: 9.5, letterSpacing: "0.14em", color: "var(--fainter)" }}
-              >
+              <span className="t-lab" style={{ marginBottom: 4 }}>
                 YOUR PHONE
               </span>
-              <span style={{ fontSize: 14, fontWeight: 600, color: "var(--faint)" }}>
+              <span style={{ fontSize: 15, fontWeight: 600, color: "var(--faint)" }}>
                 Silent
               </span>
-              <span style={{ fontSize: 12, color: "var(--fainter)" }}>
+              <span style={{ fontSize: 12.5, color: "var(--fainter)" }}>
                 Nothing here can reach it.
               </span>
             </div>
@@ -168,61 +182,56 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
         </div>
 
         <div className="two" style={{ alignItems: "stretch" }}>
-          <div style={{ display: "flex", gap: 28, alignItems: "flex-start" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "clamp(28px, 5vw, 56px)",
+              alignItems: "flex-start",
+              alignSelf: "center",
+            }}
+          >
             <div className="stat">
-              <span className="statNum">5</span>
-              <span style={{ fontSize: 12, color: "var(--muted)" }}>things you own</span>
+              <span className="statNum xl">5</span>
+              <span className="t-sm">things you own</span>
             </div>
             <div className="stat">
-              <span className="statNum" style={{ color: "var(--loss)" }}>
+              <span className="statNum xl" style={{ color: "var(--fainter)" }}>
                 0
               </span>
-              <span style={{ fontSize: 12, color: "var(--muted)" }}>
-                wires between them
-              </span>
+              <span className="t-sm">wires between them</span>
             </div>
           </div>
 
-          <div
-            style={{
-              background: "var(--loss-wash)",
-              border: "1px solid var(--loss-line)",
-              borderRadius: 4,
-              padding: "18px 19px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 9,
-            }}
-          >
+          <div className="noteBox">
             <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
               <Warn />
               <span
                 className="mono"
-                style={{ fontSize: 10, letterSpacing: "0.16em", color: "var(--loss)" }}
+                style={{
+                  fontSize: 9.5,
+                  fontWeight: 500,
+                  letterSpacing: "0.2em",
+                  color: "var(--loss)",
+                }}
               >
                 WHERE THE MONEY GOES
               </span>
             </div>
-            <span style={{ fontSize: 13.5, color: "var(--ink-2)", lineHeight: 1.55 }}>
-              A <b>{price}</b> payment landing in your account is the <b>beginning</b> of a
+            <span className="t-body">
+              A <b style={{ color: "var(--ink)", fontWeight: 600 }}>{price}</b> payment
+              landing in your account is the{" "}
+              <b style={{ color: "var(--ink)", fontWeight: 600 }}>beginning</b> of a
               relationship worth several times that. Right now it&rsquo;s the end of one —
               because the moment the money arrives, nothing else happens.
             </span>
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            gap: 32,
-            flexWrap: "wrap",
-            marginTop: "auto",
-          }}
-        >
-          <div className="stack" style={{ gap: 7, maxWidth: 800 }}>
-            <h2 className="h1">Right now, you work for it.</h2>
+        <div className="closer" style={{ marginTop: "auto", paddingTop: 12 }}>
+          <div className="stack" style={{ gap: 16, maxWidth: 800 }}>
+            <h2 className="h1">
+              Right now, <em className="italic">you</em> work for it.
+            </h2>
             <p className="lede">
               You don&rsquo;t have a system. You have things that each work alone, and a
               person carrying messages between them by hand. That person is you.
@@ -232,7 +241,7 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
           </div>
           <button className="go" onClick={onNext}>
             <span>Show me the wire</span>
-            <Arrow color="#fff" />
+            <Arrow />
           </button>
         </div>
       </div>

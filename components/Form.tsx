@@ -46,13 +46,13 @@ export function Form({ onSubmit }: { onSubmit: (a: Answers) => void }) {
 
   return (
     <Shell step={1} label="THIRTY SECONDS">
-      <div className="formSplit" style={{ paddingTop: "clamp(28px, 4vw, 44px)" }}>
-        <form className="stack" style={{ gap: 30 }} onSubmit={submit} noValidate>
-          <div className="stack" style={{ gap: 10 }}>
+      <div className="formSplit">
+        <form className="stack" style={{ gap: 34 }} onSubmit={submit} noValidate>
+          <div className="stack" style={{ gap: 18 }}>
             <h1 className="h1">
               Five boxes. Then watch
               <br />
-              your own business run itself.
+              your own business <em className="italic">run itself.</em>
             </h1>
             <p className="lede">
               You&rsquo;ve been working for the AI. This is what it looks like when it
@@ -62,7 +62,7 @@ export function Form({ onSubmit }: { onSubmit: (a: Answers) => void }) {
             </p>
           </div>
 
-          <div className="stack" style={{ gap: 15 }}>
+          <div className="stack" style={{ gap: 14 }}>
             <div className="formGrid">
               {FIELDS.slice(0, 2).map((f) => (
                 <div className="field" key={f.key}>
@@ -127,12 +127,12 @@ export function Form({ onSubmit }: { onSubmit: (a: Answers) => void }) {
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 22, flexWrap: "wrap" }}>
             <button className="go" type="submit" disabled={!ready}>
               <span>Build my system</span>
-              <Arrow color="#fff" />
+              <Arrow />
             </button>
-            <span style={{ fontSize: 12.5, color: "var(--fainter)", lineHeight: 1.5 }}>
+            <span className="t-xs" style={{ color: "var(--fainter)" }}>
               Takes about 90 seconds.
               <br />
               Nothing is charged and nothing is sold to you.
@@ -140,9 +140,14 @@ export function Form({ onSubmit }: { onSubmit: (a: Answers) => void }) {
           </div>
         </form>
 
-        <div className="stack phoneCol" style={{ gap: 18 }}>
-          <span className="eyebrow">IN ABOUT NINETY SECONDS, THIS IS YOUR PHONE</span>
-          <div style={{ display: "flex", justifyContent: "center", opacity: 0.92 }}>
+        <div className="stack phoneCol" style={{ gap: 20 }}>
+          <span
+            className="eyebrow"
+            style={{ textAlign: "center", letterSpacing: "0.13em", fontSize: 9.5 }}
+          >
+            IN ABOUT NINETY SECONDS, THIS IS YOUR PHONE
+          </span>
+          <div className="phoneStage">
             <Phone
               price={price ?? 250}
               customerName="Maria Ruiz"
@@ -164,11 +169,16 @@ export function Form({ onSubmit }: { onSubmit: (a: Answers) => void }) {
                 <>
                   <span
                     className="mono pulse"
-                    style={{ fontSize: 10, letterSpacing: "0.12em", color: "var(--money)" }}
+                    style={{
+                      fontSize: 9.5,
+                      letterSpacing: "0.18em",
+                      color: "var(--money)",
+                      fontWeight: 500,
+                    }}
                   >
                     ● NOT A MOCKUP
                   </span>
-                  <span style={{ fontSize: 11, color: "var(--fainter)" }}>
+                  <span style={{ fontSize: 11, color: "var(--faint)" }}>
                     Your real phone. Your real number.
                   </span>
                 </>

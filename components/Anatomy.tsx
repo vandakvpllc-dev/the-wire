@@ -15,38 +15,29 @@ export function Anatomy({ a, onNext }: { a: Answers; onNext: () => void }) {
 
   return (
     <Shell step={3} label="HOW IT ACTUALLY WORKS">
-      <div className="stack" style={{ gap: "clamp(22px, 2.8vw, 30px)", paddingTop: 32 }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            gap: 40,
-            flexWrap: "wrap",
-          }}
-        >
-          <div className="stack" style={{ gap: 9, maxWidth: 720 }}>
-            <h1 className="h1">Every system is five parts.</h1>
+      <div className="stack" style={{ gap: "clamp(26px, 3.2vw, 40px)" }}>
+        <div className="closer">
+          <div className="stack" style={{ gap: 16, maxWidth: 720 }}>
+            <h1 className="h1">
+              Every system is <em className="italic">five</em> parts.
+            </h1>
             <p className="lede">
               Not five hundred. Five. Once you can name them, you can look at any business
               — yours, your sister&rsquo;s, your competitor&rsquo;s — and put your finger
               on the exact part that&rsquo;s missing.
             </p>
           </div>
-          <div
-            className="stack"
-            style={{
-              gap: 7,
-              borderLeft: "2px solid var(--money)",
-              paddingLeft: 20,
-              minWidth: 260,
-            }}
-          >
-            <span className="eyebrow">WIRING FOR YOU NOW</span>
-            <span style={{ fontSize: 13.5, fontWeight: 600, lineHeight: 1.4 }}>
+          <div className="wiringNote">
+            <span className="eyebrow" style={{ color: "var(--money)" }}>
+              WIRING FOR YOU NOW
+            </span>
+            <span style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.4 }}>
               Your {price} link → your phone
             </span>
-            <span className="mono" style={{ fontSize: 11, color: "var(--money)" }}>
+            <span
+              className="mono"
+              style={{ fontSize: 11, color: "var(--money)", letterSpacing: "0.02em" }}
+            >
               connected · 6.2 seconds
             </span>
           </div>
@@ -61,77 +52,49 @@ export function Anatomy({ a, onNext }: { a: Answers; onNext: () => void }) {
             return (
               <div
                 key={p.id}
-                className={last ? "cardMoney" : "card"}
-                style={{
-                  padding: last ? "21px 19px 19px" : "22px 20px 20px",
-                  background: last ? "var(--money-wash)" : undefined,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 12,
-                }}
+                className={`partCard ${last ? "cardMoney" : "card"}`}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <span className="mono" style={{ fontSize: 11, color: "var(--money)" }}>
-                    0{i + 1}
+                <div className="partTop">
+                  <span className="partNum">0{i + 1}</span>
+                  <span className="partIcon">
+                    <Icon color={last ? "var(--money-bright)" : "var(--faint)"} />
                   </span>
-                  <Icon />
                 </div>
-                <span
-                  className="mono"
-                  style={{ fontSize: 12.5, letterSpacing: "0.16em" }}
-                >
-                  {p.label}
-                </span>
-                <span
-                  style={{
-                    fontSize: 13.5,
-                    color: "var(--ink-3)",
-                    lineHeight: 1.55,
-                    flexGrow: 1,
-                  }}
-                >
-                  {p.plain({ price, sells: a.sells })}
-                </span>
-                <div
-                  style={{
-                    height: 1,
-                    background: last ? "var(--money-line)" : "var(--line-soft)",
-                  }}
-                />
+                <span className="partName">{p.label}</span>
+                <span className="partText">{p.plain({ price, sells: a.sells })}</span>
+                <div className={last ? "ruleMoney" : "rule"} />
                 {last ? (
                   <span
                     className="mono"
-                    style={{ fontSize: 15, color: "var(--money)", fontWeight: 500 }}
+                    style={{
+                      fontSize: 17,
+                      color: "var(--money)",
+                      fontWeight: 500,
+                      letterSpacing: "-0.02em",
+                      textShadow: "0 0 22px rgba(52,209,124,.45)",
+                    }}
                   >
                     {moneyIn(a.price)}
                   </span>
                 ) : (
-                  <span
-                    className="mono"
-                    style={{ fontSize: 10.5, color: "var(--fainter)" }}
-                  >
-                    {p.tool}
-                  </span>
+                  <span className="partTool">{p.tool}</span>
                 )}
               </div>
             );
           })}
         </div>
 
-        <div className="card revealGrid" style={{ padding: "26px 28px" }}>
-          <div className="stack" style={{ gap: 7 }}>
+        <div
+          className="cardSunk revealGrid"
+          style={{ padding: "clamp(24px, 3vw, 40px) clamp(22px, 3vw, 40px)" }}
+        >
+          <div className="stack" style={{ gap: 14 }}>
             <h2 className="h2">
               ChatGPT is part three.
               <br />
-              You&rsquo;re the other four.
+              You&rsquo;re the <em className="italic">other four.</em>
             </h2>
-            <p className="lede" style={{ fontSize: 13.5 }}>
+            <p className="lede" style={{ fontSize: 15 }}>
               That&rsquo;s the entire misunderstanding. It&rsquo;s brilliant at deciding,
               and it owns none of the wires on either side — so you fetch and carry for it,
               forever, for free, at eleven o&rsquo;clock at night. That is working for the
@@ -153,20 +116,15 @@ export function Anatomy({ a, onNext }: { a: Answers; onNext: () => void }) {
         </div>
 
         <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 28,
-            flexWrap: "wrap",
-          }}
+          className="closer"
+          style={{ alignItems: "center", marginTop: "auto", paddingTop: 8 }}
         >
           <p className="lede" style={{ maxWidth: 620 }}>
             Enough theory. Buy something from yourself and watch all five parts run.
           </p>
           <button className="go" onClick={onNext}>
             <span>Pull the trigger</span>
-            <Arrow color="#fff" />
+            <Arrow />
           </button>
         </div>
       </div>

@@ -116,17 +116,9 @@ export function Live({
 
   return (
     <Shell step={4} label="YOU PULL THE TRIGGER" live={!done}>
-      <div className="stack" style={{ gap: "clamp(20px, 2.6vw, 26px)", paddingTop: 30 }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            gap: 36,
-            flexWrap: "wrap",
-          }}
-        >
-          <div className="stack" style={{ gap: 8, maxWidth: 690 }}>
+      <div className="stack" style={{ gap: "clamp(24px, 3vw, 34px)" }}>
+        <div className="closer">
+          <div className="stack" style={{ gap: 16, maxWidth: 690 }}>
             <h1 className="h1">You just paid yourself {moneyIn(a.price).slice(1)}.</h1>
             <p className="lede">
               That was a test payment, so no card was charged. Everything after it is
@@ -146,16 +138,9 @@ export function Live({
               <span className="statNum">0</span>
               <span className="statLabel">CLICKS BY YOU</span>
             </div>
-            <div
-              className="stat"
-              style={{ borderLeft: "2px solid var(--money)", paddingLeft: 18 }}
-            >
-              <span className="statNum" style={{ color: "var(--money)", fontWeight: 500 }}>
-                {moneyIn(a.price)}
-              </span>
-              <span className="statLabel" style={{ color: "var(--money)" }}>
-                COLLECTED
-              </span>
+            <div className="stat statMoney">
+              <span className="statNum">{moneyIn(a.price)}</span>
+              <span className="statLabel">COLLECTED</span>
             </div>
           </div>
         </div>
@@ -173,35 +158,33 @@ export function Live({
         />
 
         <div className="liveSplit">
-          <div className="card" style={{ display: "flex", flexDirection: "column" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: 12,
-                padding: "14px 20px",
-                borderBottom: "1px solid var(--line-soft)",
-                flexWrap: "wrap",
-              }}
-            >
+          <div className="card console">
+            <div className="consoleBar">
               <span
                 className="mono"
-                style={{ fontSize: 10.5, letterSpacing: "0.16em", color: "var(--muted)" }}
+                style={{
+                  fontSize: 10,
+                  fontWeight: 500,
+                  letterSpacing: "0.2em",
+                  color: "var(--ink-3)",
+                }}
               >
                 WHAT IT IS DOING, RIGHT NOW
               </span>
-              <span className="mono" style={{ fontSize: 10.5, color: "var(--fainter)" }}>
+              <span
+                className="mono"
+                style={{ fontSize: 10, letterSpacing: "0.1em", color: "var(--fainter)" }}
+              >
                 nothing hidden
               </span>
             </div>
 
-            <div
-              className="stack"
-              style={{ gap: 12, padding: "20px 20px", minHeight: 250 }}
-            >
-              {steps.map((s) => (
-                <div className="logRow rise" key={s.n}>
+            <div className="consoleBody">
+              {steps.map((s, i) => (
+                <div
+                  className={`logRow rise${i === steps.length - 1 && !done ? " hot" : ""}`}
+                  key={s.n}
+                >
                   <span className="logTime">+{(s.at / 1000).toFixed(1)}s</span>
                   <span className="logPart">{s.part.toUpperCase()}</span>
                   <span className="logText">
@@ -224,37 +207,29 @@ export function Live({
               {steps.length === 0 && (
                 <span
                   className="mono pulse"
-                  style={{ fontSize: 12.5, color: "var(--fainter)" }}
+                  style={{ fontSize: 12.5, color: "var(--faint)", padding: "6px 12px" }}
                 >
                   waiting for the payment…
                 </span>
               )}
             </div>
 
-            <div
-              style={{
-                marginTop: "auto",
-                borderTop: "1px solid var(--line-soft)",
-                padding: "16px 20px",
-                display: "flex",
-                alignItems: "flex-start",
-                gap: 12,
-                background: "#FCFBF9",
-              }}
-            >
-              <span style={{ paddingTop: 2 }}>
+            <div className="consoleFoot">
+              <span style={{ paddingTop: 2, display: "flex" }}>
                 <Clock />
               </span>
-              <span style={{ fontSize: 12.5, color: "var(--ink-3)", lineHeight: 1.45 }}>
+              <span style={{ fontSize: 12.5, color: "var(--muted)", lineHeight: 1.5 }}>
                 Those timestamps are the real machine times — the whole thing took under a
                 second. It is replayed slowly here so you can read it. One of those steps
-                is parked for <b>Wednesday morning</b>, and it will happen whether or not
-                you ever open this page again.
+                is parked for{" "}
+                <b style={{ color: "var(--ink-2)", fontWeight: 600 }}>Wednesday morning</b>,
+                and it will happen whether or not you ever open this page again.
               </span>
             </div>
           </div>
 
           <div className="phoneCol">
+            <div className="phoneStage">
             <Phone
               price={a.price}
               customerName={copy.customerName}
@@ -271,42 +246,47 @@ export function Live({
                   <>
                     <span
                       className="mono"
-                      style={{ fontSize: 10, letterSpacing: "0.12em", color: "var(--money)" }}
+                      style={{
+                        fontSize: 9.5,
+                        fontWeight: 500,
+                        letterSpacing: "0.18em",
+                        color: "var(--money)",
+                      }}
                     >
                       ● SENT TO YOUR {delivery.channels.includes("sms") ? "PHONE" : "INBOX"}
                     </span>
-                    <span style={{ fontSize: 10.5, color: "var(--fainter)" }}>
+                    <span style={{ fontSize: 10.5, color: "var(--faint)" }}>
                       {delivery.channels.includes("sms") ? a.mobile || a.email : a.email}
                     </span>
                   </>
                 ) : delivery && !delivery.ok ? (
-                  <span style={{ fontSize: 10.5, color: "var(--fainter)" }}>
+                  <span style={{ fontSize: 10.5, color: "var(--faint)", lineHeight: 1.5 }}>
                     This is what landed on screen. The send didn&rsquo;t go out
                     {delivery.reason === "no channel configured" ? " — no channel is wired up yet." : "."}
                   </span>
                 ) : (
                   <span
                     className="mono pulse"
-                    style={{ fontSize: 10, letterSpacing: "0.12em", color: "var(--money)" }}
+                    style={{
+                      fontSize: 9.5,
+                      fontWeight: 500,
+                      letterSpacing: "0.18em",
+                      color: "var(--money)",
+                    }}
                   >
                     ● SENDING…
                   </span>
                 )
               }
             />
+            </div>
           </div>
         </div>
 
         {done && (
           <div
-            className="rise"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 28,
-              flexWrap: "wrap",
-            }}
+            className="rise closer"
+            style={{ alignItems: "center", marginTop: "auto", paddingTop: 4 }}
           >
             <p className="lede" style={{ maxWidth: 640 }}>
               {delivery?.ok
@@ -315,7 +295,7 @@ export function Live({
             </p>
             <button className="go" onClick={onNext}>
               <span>What that&rsquo;s worth</span>
-              <Arrow color="#fff" />
+              <Arrow />
             </button>
           </div>
         )}
