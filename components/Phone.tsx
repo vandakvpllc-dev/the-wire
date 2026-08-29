@@ -1,23 +1,49 @@
-import { CalendarGlyph, Clock, DollarGlyph, MailGlyph } from "./Icons";
+import { BoxGlyph, CalendarGlyph, Clock, DollarGlyph, ListGlyph, MailGlyph } from "./Icons";
 import { moneyIn } from "@/lib/money";
+import type { Act, ActKind } from "@/lib/types";
 
 /**
  * No fake status bar, no fake keyboard. On a real phone the real ones render
  * on top of this; a painted one reads as a toy.
  */
 
-function Icon({ kind }: { kind: "money" | "calendar" | "mail" }) {
-  const bg = kind === "money" ? "var(--money)" : "#C4BDB3";
+const LABEL: Record<ActKind, string> = {
+  mail: "Mail",
+  calendar: "Calendar",
+  box: "Orders",
+  list: "Your list",
+};
+
+function Glyph({ kind }: { kind: ActKind }) {
+  if (kind === "calendar") return <CalendarGlyph />;
+  if (kind === "box") return <BoxGlyph />;
+  if (kind === "list") return <ListGlyph />;
+  return <MailGlyph />;
+}
+
+function Icon({ kind }: { kind: ActKind | "money" }) {
   return (
-    <span className="appIcon" style={{ background: bg }}>
-      {kind === "money" ? (
-        <DollarGlyph />
-      ) : kind === "calendar" ? (
-        <CalendarGlyph />
-      ) : (
-        <MailGlyph />
-      )}
+    <span
+      className="appIcon"
+      style={{ background: kind === "money" ? "var(--money)" : "#C4BDB3" }}
+    >
+      {kind === "money" ? <DollarGlyph /> : <Glyph kind={kind} />}
     </span>
+  );
+}
+
+function ActCard({ act }: { act: Act }) {
+  return (
+    <div className="notif rise">
+      <div className="notifHead">
+        <Icon kind={act.kind} />
+        <span>{LABEL[act.kind]}</span>
+        <span className="notifWhen">now</span>
+      </div>
+      <span className="notifBody">
+        {act.text.charAt(0).toUpperCase() + act.text.slice(1)}.
+      </span>
+    </div>
   );
 }
 
@@ -25,11 +51,13 @@ export interface PhoneState {
   price: number;
   customerName: string;
   purchase: string;
+  actNow: Act;
+  actSecond: Act;
   followUp: string;
   /** which cards have landed */
   paid: boolean;
-  booked: boolean;
-  mailed: boolean;
+  didNow: boolean;
+  didSecond: boolean;
   queued: boolean;
   footer: React.ReactNode;
 }
@@ -51,31 +79,8 @@ export function Phone(s: PhoneState) {
         </div>
       )}
 
-      {s.booked && (
-        <div className="notif rise">
-          <div className="notifHead">
-            <Icon kind="calendar" />
-            <span>Calendar</span>
-            <span className="notifWhen">now</span>
-          </div>
-          <span className="notifBody">
-            Thursday 2:15 PM is on your calendar. You did nothing.
-          </span>
-        </div>
-      )}
-
-      {s.mailed && (
-        <div className="notif rise">
-          <div className="notifHead">
-            <Icon kind="mail" />
-            <span>Mail</span>
-            <span className="notifWhen">now</span>
-          </div>
-          <span className="notifBody">
-            Receipt sent. In your words, from your address.
-          </span>
-        </div>
-      )}
+      {s.didNow && <ActCard act={s.actNow} />}
+      {s.didSecond && <ActCard act={s.actSecond} />}
 
       {s.queued && (
         <div className="notif waiting rise">

@@ -124,68 +124,28 @@ export function Anatomy({ a, onNext }: { a: Answers; onNext: () => void }) {
           })}
         </div>
 
-        <div
-          className="card"
-          style={{
-            padding: "26px 28px",
-            display: "grid",
-            gridTemplateColumns: "minmax(280px, 468px) minmax(0, 1fr)",
-            gap: 40,
-            alignItems: "center",
-          }}
-        >
+        <div className="card revealGrid" style={{ padding: "26px 28px" }}>
           <div className="stack" style={{ gap: 7 }}>
-            <h2 className="h2">ChatGPT is part three.</h2>
+            <h2 className="h2">
+              ChatGPT is part three.
+              <br />
+              You&rsquo;re the other four.
+            </h2>
             <p className="lede" style={{ fontSize: 13.5 }}>
               That&rsquo;s the entire misunderstanding. It&rsquo;s brilliant at deciding,
-              and it owns none of the wires on either side. So you hand-carry parts 1, 2, 4
-              and 5 yourself — forever, for free, at eleven o&rsquo;clock at night.
+              and it owns none of the wires on either side — so you fetch and carry for it,
+              forever, for free, at eleven o&rsquo;clock at night. That is working for the
+              AI. It&rsquo;s meant to be the other way round.
             </p>
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-              gap: 10,
-            }}
-          >
+          <div className="fiveTight">
             {PARTS.map((p, i) => {
               const isAi = i === 2;
               return (
-                <div
-                  key={p.id}
-                  style={{
-                    border: isAi ? "1.5px solid var(--money)" : "1px dashed var(--dashed)",
-                    background: isAi ? "var(--money-wash)" : undefined,
-                    borderRadius: 3,
-                    padding: "14px 6px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: 6,
-                    textAlign: "center",
-                  }}
-                >
-                  <span
-                    className="mono"
-                    style={{
-                      fontSize: 9,
-                      letterSpacing: "0.1em",
-                      color: isAi ? "var(--money)" : "var(--fainter)",
-                    }}
-                  >
-                    {p.label}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 600,
-                      color: isAi ? "var(--ink)" : "var(--faint)",
-                    }}
-                  >
-                    {isAi ? "the AI" : "you"}
-                  </span>
+                <div className={isAi ? "slot ai" : "slot"} key={p.id}>
+                  <span className="slotName">{p.label}</span>
+                  <span className="slotWho">{isAi ? "the AI" : "you"}</span>
                 </div>
               );
             })}

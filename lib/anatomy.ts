@@ -20,29 +20,29 @@ export const PARTS: Part[] = [
     id: "trigger",
     label: "TRIGGER",
     plain: ({ price }) =>
-      `Something real happens. Somebody pays your ${price} link. Nobody presses a button — not you, not anyone.`,
+      `Something real happens. Somebody pays you ${price}. Nobody presses a button — not you, not anyone.`,
     tool: "your payment link",
   },
   {
     id: "capture",
     label: "CAPTURE",
     plain: () =>
-      "She gets written down somewhere that remembers her. This is the part almost nobody has.",
+      "They get written down somewhere that remembers them. This is the part almost nobody has.",
     tool: "a plain spreadsheet",
   },
   {
     id: "decide",
     label: "DECIDE",
     plain: ({ price }) =>
-      `The AI reads her and judges. Paid or just curious? New or returning? Worth ${price} or worth ten times that?`,
+      `The AI reads them and judges. Paid or just curious? New or returning? Worth ${price} or worth ten times that?`,
     tool: "the ai — this part only",
   },
   {
     id: "act",
     label: "ACT",
     plain: () =>
-      "It does the next thing without asking. Receipt, welcome, calendar hold, and a follow-up parked for Wednesday.",
-    tool: "email · calendar",
+      "It does the next thing without asking — whatever your business actually owes someone who just paid — and parks a follow-up for Wednesday.",
+    tool: "email · your records",
   },
   {
     id: "notify",

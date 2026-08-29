@@ -110,6 +110,19 @@ export const MailGlyph = ({ size = 10 }: P) => (
   </svg>
 );
 
+export const BoxGlyph = ({ size = 10 }: P) => (
+  <svg {...base(size, "#fff")} strokeWidth={2.6}>
+    <path d="M3 8.5 12 4l9 4.5v7L12 20l-9-4.5z" />
+    <path d="M3 8.5 12 13l9-4.5M12 13v7" />
+  </svg>
+);
+
+export const ListGlyph = ({ size = 10 }: P) => (
+  <svg {...base(size, "#fff")} strokeWidth={2.6}>
+    <path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01" />
+  </svg>
+);
+
 /* --- asset glyphs for the map --- */
 
 export const CardIcon = ({ size = 17, color = "var(--fainter)" }: P) => (

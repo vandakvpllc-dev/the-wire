@@ -55,9 +55,10 @@ export function Form({ onSubmit }: { onSubmit: (a: Answers) => void }) {
               your own business run itself.
             </h1>
             <p className="lede">
-              No credit card, no software to install, nothing to cancel later. Fill this in
-              and the next four screens are built out of your answers — your service, your
-              price, your phone.
+              You&rsquo;ve been working for the AI. This is what it looks like when it
+              works for you. Fill this in and the next four screens are built out of your
+              answers — what you sell, your price, your phone. No card, nothing to install,
+              nothing to cancel later.
             </p>
           </div>
 
@@ -119,7 +120,7 @@ export function Form({ onSubmit }: { onSubmit: (a: Answers) => void }) {
                 id="sells"
                 name="sells"
                 type="text"
-                placeholder="A one-hour placement consultation"
+                placeholder="A coaching call, a custom cake, a website audit…"
                 value={v.sells}
                 onChange={set("sells")}
               />
@@ -145,11 +146,19 @@ export function Form({ onSubmit }: { onSubmit: (a: Answers) => void }) {
             <Phone
               price={price ?? 250}
               customerName="Maria Ruiz"
-              purchase={v.sells.trim().toLowerCase() || "a one-hour consultation"}
+              purchase={v.sells.trim().toLowerCase() || "the thing you sell"}
+              actNow={{
+                text: "receipt and welcome note sent from your own address",
+                kind: "mail",
+              }}
+              actSecond={{
+                text: "added to your customer list with everything they bought",
+                kind: "list",
+              }}
               followUp="The next offer sends itself in three days."
               paid
-              booked
-              mailed
+              didNow
+              didSecond
               queued={false}
               footer={
                 <>

@@ -259,10 +259,12 @@ export function Live({
               price={a.price}
               customerName={copy.customerName}
               purchase={copy.purchase}
+              actNow={copy.actNow}
+              actSecond={copy.actSecond}
               followUp={copy.followUp}
               paid={has(0)}
-              booked={has(4)}
-              mailed={has(3)}
+              didNow={has(3)}
+              didSecond={has(4)}
               queued={has(5)}
               footer={
                 delivery?.ok ? (

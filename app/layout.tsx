@@ -27,7 +27,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "The Wire",
   description:
-    "You have a payment link, a booking link and a website. None of them talk to each other. Watch what happens when they do.",
+    "You're not using AI. You're working for it. Make it work for you — that's what it's for. Ninety seconds, on your own business.",
 };
 
 export const viewport: Viewport = {

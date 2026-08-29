@@ -84,13 +84,7 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
             {a.firstName.toUpperCase()}, HERE&rsquo;S WHAT YOU ALREADY OWN
           </span>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(232px, 1fr))",
-              gap: 12,
-            }}
-          >
+          <div className="assetGrid">
             <Asset
               icon={<CardIcon />}
               kind="PAYMENT LINK"
@@ -101,8 +95,8 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
             />
             <Asset
               icon={<CalendarIcon />}
-              kind="BOOKING LINK"
-              title="Someone books"
+              kind="SIGN-UP FORM"
+              title="Someone signs up"
               under="It tells no one. Not even you."
             />
             <Asset
@@ -119,7 +113,7 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
             />
 
             <div
-              className="card"
+              className="card spanTwo"
               style={{
                 padding: "17px 19px",
                 display: "flex",
@@ -127,7 +121,6 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
                 gap: 7,
                 border: "1.5px solid var(--ink)",
                 boxShadow: "var(--shadow-md)",
-                gridColumn: "span 2",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
@@ -147,6 +140,7 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
             </div>
 
             <div
+              className="spanTwo"
               style={{
                 background: "var(--sunk)",
                 border: "1px dashed var(--dashed)",
@@ -155,7 +149,6 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
                 display: "flex",
                 flexDirection: "column",
                 gap: 6,
-                gridColumn: "span 2",
               }}
             >
               <span
@@ -229,11 +222,12 @@ export function Diagnosis({ a, onNext }: { a: Answers; onNext: () => void }) {
           }}
         >
           <div className="stack" style={{ gap: 7, maxWidth: 800 }}>
-            <h2 className="h1">You are the wire.</h2>
+            <h2 className="h1">Right now, you work for it.</h2>
             <p className="lede">
-              You don&rsquo;t have a system. You have things that each work alone and a
-              person carrying messages between them. That person is you, and you&rsquo;re
-              the part that gets tired, forgets, and sleeps.
+              You don&rsquo;t have a system. You have things that each work alone, and a
+              person carrying messages between them by hand. That person is you.
+              You&rsquo;re the wire — and the wire is the part that gets tired, forgets,
+              and sleeps.
             </p>
           </div>
           <button className="go" onClick={onNext}>

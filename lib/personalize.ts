@@ -12,7 +12,23 @@ import { money } from "./money";
  * is held on the client until they pull the trigger. If the model is slow or
  * unreachable, `fallback()` is already good enough to ship, so the magic moment
  * is never gambled on a network round-trip.
+ *
+ * The whole point of generating this is that the demo has to fit anyone with
+ * something to sell. A baker does not book appointments; a consultant does not
+ * ship boxes. So the two actions are written for THEIR business rather than
+ * assumed.
  */
+
+const ActSchema = z.object({
+  text: z
+    .string()
+    .describe("One clipped log line, lowercase, under 12 words. No pronouns like 'I'."),
+  kind: z
+    .enum(["mail", "calendar", "box", "list"])
+    .describe(
+      "mail = something was sent. calendar = something was scheduled or held. box = something physical or a digital file was dispatched or unlocked. list = a record was updated.",
+    ),
+});
 
 const CopySchema = z.object({
   customerName: z
@@ -26,35 +42,51 @@ const CopySchema = z.object({
   verdict: z
     .string()
     .describe(
-      "What the AI concluded about this customer, as one clipped log line under 12 words. No pronouns like 'I'.",
+      "What the AI concluded about this customer, as one clipped log line under 12 words.",
     ),
+  actNow: ActSchema.describe(
+    "The first thing the system does FOR THE CUSTOMER, immediately. Whatever this business would actually owe someone the second they paid.",
+  ),
+  actSecond: ActSchema.describe(
+    "The second thing, done for the OWNER — their records, their schedule, their stock. Must be a different kind from actNow.",
+  ),
   followUp: z
     .string()
     .describe(
-      "The specific follow-up offer the system will send three days later. One sentence, under 20 words, concrete to this business.",
+      "The follow-up the system sends three days later. One sentence, under 20 words, concrete to this business, and aimed at a second sale.",
     ),
 });
 
-const SYSTEM = `You write the copy for a live demo that shows small business owners what a wired AI system does with a payment.
+const SYSTEM = `You write the copy for a live demo that shows business owners what a wired AI system does the moment somebody pays them.
 
-The reader is not technical. They are a real operator — a realtor, a coach, a placement advisor, a house cleaner. Write the way their smartest customer would talk. Plain words, specific nouns, no marketing voice, no exclamation marks, no em-dashes, no words like "seamless", "leverage", "unlock" or "journey".
+The reader is not technical, and they could be selling anything: coaching, cakes, cleaning, houses, courses, jewellery, bookkeeping, dog training, software. Never assume they take appointments, never assume they ship anything, never assume they have staff. Read what they actually sell and write only what would genuinely happen in that business.
 
-You are given what they sell and what they charge. Everything you write must sound like it came out of that exact business, not a generic one.`;
+Write the way their smartest customer would talk. Plain words, specific nouns, no marketing voice, no exclamation marks, no em-dashes, no words like "seamless", "leverage", "unlock" or "journey". Refer to the customer by name or as "them" — never guess their gender.`;
 
 function prompt(a: Answers): string {
   return `They sell: ${a.sells}
 They charge: ${money(a.price)}
 
-Invent the single customer who just paid them, and the follow-up the system will send three days later. The follow-up must be a real next step someone who bought this would plausibly want — not a satisfaction survey, not "just checking in".`;
+Invent the single customer who just paid them. Then write the two things a real system would do in the first second, and the follow-up it would send three days later.
+
+The follow-up must be a plausible next step for someone who just bought this — not a satisfaction survey, not "just checking in".`;
 }
 
-/** Good enough to ship on its own. Used whenever the model is slow or absent. */
+/** Good enough to ship on its own, and true for any business on earth. */
 export function fallback(a: Answers): Personalized {
   return {
     customerName: "Maria Ruiz",
     purchase: a.sells.trim().toLowerCase().replace(/\.$/, ""),
-    verdict: "new client, paid in full, no history — treat as high value",
-    followUp: `Ask how it went and offer the next ${money(a.price)} session.`,
+    verdict: "new customer, paid in full, no history — treat as high value",
+    actNow: {
+      text: "receipt and welcome note sent from your own address",
+      kind: "mail",
+    },
+    actSecond: {
+      text: "added to your customer list with everything they bought",
+      kind: "list",
+    },
+    followUp: `Ask how it went and offer them the next thing you sell.`,
     live: false,
   };
 }

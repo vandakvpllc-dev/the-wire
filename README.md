@@ -83,9 +83,21 @@ them, so it needs no permissions at all, and the calendar invite rides along as 
 `.ics` attachment. OAuth belongs in the paid product, when they're wiring their real
 business.
 
+## It has to fit anyone
+
+A baker doesn't book appointments. A consultant doesn't ship boxes. So nothing in the
+demo assumes what kind of business it's looking at: the two things the system *does* are
+written per business by `lib/personalize.ts` and carry a `kind` (`mail`, `calendar`,
+`box`, `list`) that picks the icon on the phone. The calendar invite is only attached
+when that business actually schedules something. The fallback copy — what runs with no
+API key — is true of every business on earth.
+
+Verified end to end as a $450 consultancy and an $85 cake business.
+
 ## Known gaps
 
-- The responsive breakpoints (720px / 1040px) are written but have not been verified on a
-  real phone. Worth ten minutes with an actual device before this goes out.
-- On a phone the "look down at your hand" beat changes — `components/Live.tsx` detects it
-  and swaps the line — but that alternate path is also unverified on hardware.
+- Verified at phone width in a desktop browser, not on real hardware. The alternate beat
+  on mobile ("swipe down, it's already waiting" instead of "look down at your hand") is
+  written and detected but unconfirmed on a real device.
+- No channel is wired up yet, so the notification currently only lands on screen. That's
+  three keys in `.env.local` away.

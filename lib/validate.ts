@@ -1,5 +1,7 @@
-import type { Answers, Personalized } from "./types";
+import type { Act, ActKind, Answers, Personalized } from "./types";
 import { parsePrice } from "./money";
+
+const KINDS: ActKind[] = ["mail", "calendar", "box", "list"];
 
 const clip = (s: unknown, max: number) => String(s ?? "").trim().slice(0, max);
 
@@ -20,6 +22,15 @@ export function readAnswers(raw: unknown): Answers | null {
   return { firstName, email, mobile, sells, price };
 }
 
+function readAct(raw: unknown, fallbackKind: ActKind): Act | null {
+  if (!raw || typeof raw !== "object") return null;
+  const r = raw as Record<string, unknown>;
+  const text = clip(r.text, 160);
+  if (!text) return null;
+  const kind = KINDS.includes(r.kind as ActKind) ? (r.kind as ActKind) : fallbackKind;
+  return { text, kind };
+}
+
 export function readCopy(raw: unknown): Personalized | null {
   if (!raw || typeof raw !== "object") return null;
   const r = raw as Record<string, unknown>;
@@ -28,8 +39,20 @@ export function readCopy(raw: unknown): Personalized | null {
   const purchase = clip(r.purchase, 120);
   const verdict = clip(r.verdict, 160);
   const followUp = clip(r.followUp, 200);
+  const actNow = readAct(r.actNow, "mail");
+  const actSecond = readAct(r.actSecond, "list");
 
-  if (!customerName || !purchase || !verdict || !followUp) return null;
+  if (!customerName || !purchase || !verdict || !followUp || !actNow || !actSecond) {
+    return null;
+  }
 
-  return { customerName, purchase, verdict, followUp, live: Boolean(r.live) };
+  return {
+    customerName,
+    purchase,
+    verdict,
+    actNow,
+    actSecond,
+    followUp,
+    live: Boolean(r.live),
+  };
 }

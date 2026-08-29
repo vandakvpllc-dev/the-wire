@@ -412,6 +412,70 @@
   gap: clamp(16px, 2.2vw, 30px);
 }
 
+.assetGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+  gap: 12px;
+}
+
+/* Wide cards that fill the second row — but only where two columns fit. */
+.spanTwo {
+  grid-column: span 2;
+}
+
+.revealGrid {
+  display: grid;
+  grid-template-columns: minmax(280px, 468px) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: center;
+}
+
+/* The you/you/the-AI/you/you strip. Same rule as the rail: it stays five
+   across at every width, because the shape IS the argument. */
+.fiveTight {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(4px, 1vw, 10px);
+}
+
+.slot {
+  border: 1px dashed var(--dashed);
+  border-radius: 3px;
+  padding: clamp(10px, 1.4vw, 14px) 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  min-width: 0;
+}
+
+.slot.ai {
+  border: 1.5px solid var(--money);
+  background: var(--money-wash);
+}
+
+.slotName {
+  font-family: var(--mono);
+  font-size: clamp(6.5px, 1.5vw, 9px);
+  letter-spacing: 0.06em;
+  color: var(--fainter);
+}
+
+.slot.ai .slotName {
+  color: var(--money);
+}
+
+.slotWho {
+  font-size: clamp(11px, 2vw, 14px);
+  font-weight: 600;
+  color: var(--faint);
+}
+
+.slot.ai .slotWho {
+  color: var(--ink);
+}
+
 .five {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -483,8 +547,15 @@
 @media (max-width: 720px) {
   .two,
   .formGrid,
-  .five {
+  .five,
+  .assetGrid,
+  .revealGrid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* One column means nothing can span two without pushing the page sideways. */
+  .spanTwo {
+    grid-column: auto;
   }
 
   .logRow {

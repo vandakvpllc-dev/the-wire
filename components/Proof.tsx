@@ -10,14 +10,14 @@ const DEAD = [
   ["YOU", "open ChatGPT and explain the whole thing again"],
   ["AI", "writes a lovely reply. Its job ends here."],
   ["YOU", "copy it, paste it, fix the tone, send it"],
-  ["YOU", "add the calendar hold, then try to remember Wednesday"],
+  ["YOU", "write them down somewhere, then try to remember Wednesday"],
 ] as const;
 
 const LIVE = [
   ["IT", "catches the payment the second it lands"],
-  ["IT", "writes her down where she'll be remembered"],
-  ["AI", "reads her and decides how she should be treated"],
-  ["IT", "sends, books, and parks Wednesday's next offer"],
+  ["IT", "writes them down where they'll be remembered"],
+  ["AI", "reads them and decides how they should be treated"],
+  ["IT", "delivers, records, and parks Wednesday's next offer"],
   ["IT", "buzzes your phone to say it's already handled"],
 ] as const;
 
@@ -79,7 +79,7 @@ export function Proof({ a, onRestart }: { a: Answers; onRestart: () => void }) {
             <div className="stack" style={{ gap: 4 }}>
               <span className="eyebrow">AI AUTOMATION — WHAT YOU HAVE NOW</span>
               <span style={{ fontSize: 22, fontWeight: 600, color: "var(--muted)" }}>
-                You, holding a very smart pen
+                You, working for the AI
               </span>
             </div>
             <div className="stack" style={{ gap: 8 }}>
@@ -125,7 +125,7 @@ export function Proof({ a, onRestart }: { a: Answers; onRestart: () => void }) {
                 AN AI SYSTEM — WHAT YOU JUST WATCHED
               </span>
               <span style={{ fontSize: 22, fontWeight: 600 }}>
-                A business that runs itself
+                The AI, working for you
               </span>
             </div>
             <div className="stack" style={{ gap: 8 }}>
@@ -232,8 +232,9 @@ export function Proof({ a, onRestart }: { a: Answers; onRestart: () => void }) {
           }}
         >
           <h2 className="h2" style={{ maxWidth: 820 }}>
-            Automation is a task that goes faster.
-            <br />A system is a business that keeps earning without you.
+            You&rsquo;ve been working for it.
+            <br />
+            Make it work for you — that&rsquo;s what it&rsquo;s for.
           </h2>
           <div className="stack" style={{ gap: 9, alignItems: "flex-end" }}>
             <button className="go" onClick={onRestart}>

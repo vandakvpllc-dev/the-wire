@@ -20,8 +20,10 @@ export interface ChannelResult {
  * part read from a lock screen.
  */
 export function buzzLine({ answers, copy }: Payload): string {
-  return `${moneyIn(answers.price)} — ${copy.customerName} just paid you for ${copy.purchase}. Receipt sent, calendar held, follow-up parked for Wednesday. You did none of it.`;
+  return `${moneyIn(answers.price)} — ${copy.customerName} just paid you for ${copy.purchase}. ${cap(copy.actNow.text)}, ${copy.actSecond.text}, follow-up parked for Wednesday. You did none of it.`;
 }
+
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 /* ------------------------------------------------------------------ sms */
 
@@ -89,14 +91,20 @@ export async function sendEmail(p: Payload): Promise<ChannelResult> {
   }
 
   const { answers, copy } = p;
-  const invite = buildInvite({
-    organizerName: answers.firstName,
-    organizerEmail: answers.email,
-    customerName: copy.customerName,
-    purchase: copy.purchase,
-    start: nextThursday(),
-    minutes: 60,
-  });
+
+  // Only attach an invite when this business actually schedules something.
+  // A baker does not need a calendar file, and sending one looks careless.
+  const scheduled = copy.actNow.kind === "calendar" || copy.actSecond.kind === "calendar";
+  const invite = scheduled
+    ? buildInvite({
+        organizerName: answers.firstName,
+        organizerEmail: answers.email,
+        customerName: copy.customerName,
+        purchase: copy.purchase,
+        start: nextThursday(),
+        minutes: 60,
+      })
+    : null;
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -111,12 +119,9 @@ export async function sendEmail(p: Payload): Promise<ChannelResult> {
         subject: `${moneyIn(answers.price)} — ${copy.customerName} paid you`,
         text: receiptText(p),
         html: receiptHtml(p),
-        attachments: [
-          {
-            filename: "appointment.ics",
-            content: Buffer.from(invite).toString("base64"),
-          },
-        ],
+        attachments: invite
+          ? [{ filename: "appointment.ics", content: Buffer.from(invite).toString("base64") }]
+          : undefined,
       }),
     });
     if (!res.ok) {
@@ -138,9 +143,10 @@ function receiptText({ answers, copy }: Payload): string {
     "without you touching anything:",
     "",
     "  TRIGGER   the payment landed",
-    "  CAPTURE   she was written down where she'll be remembered",
+    "  CAPTURE   they were written down where they'll be remembered",
     `  DECIDE    ${copy.verdict}`,
-    "  ACT       receipt sent, calendar held, follow-up parked for Wednesday",
+    `  ACT       ${copy.actNow.text}`,
+    `  ACT       ${copy.actSecond.text}`,
     "  NOTIFY    your phone buzzed",
     "",
     `Wednesday's follow-up is already written: ${copy.followUp}`,
@@ -172,9 +178,10 @@ function receiptHtml({ answers, copy }: Payload): string {
     </div>
     <table cellpadding="0" cellspacing="0" style="width:100%">
       ${row("TRIGGER", "The payment landed.")}
-      ${row("CAPTURE", "She was written down where she&rsquo;ll be remembered.")}
+      ${row("CAPTURE", "They were written down where they&rsquo;ll be remembered.")}
       ${row("DECIDE", escapeHtml(copy.verdict))}
-      ${row("ACT", "Receipt sent, calendar held, follow-up parked for Wednesday.")}
+      ${row("ACT", escapeHtml(cap(copy.actNow.text)) + ".")}
+      ${row("ACT", escapeHtml(cap(copy.actSecond.text)) + ".")}
       ${row("NOTIFY", "Your phone buzzed.")}
     </table>
     <div style="height:1px;background:#EFEBE4;margin:24px 0"></div>

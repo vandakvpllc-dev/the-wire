@@ -38,10 +38,26 @@ export interface Personalized {
   purchase: string;
   /** what the AI "decided" about this customer */
   verdict: string;
+  /** what the system does for the customer immediately */
+  actNow: Act;
+  /** what it does for the owner's own records or schedule */
+  actSecond: Act;
   /** the follow-up the system parks for three days out */
   followUp: string;
   /** true when this came from the model rather than the fallback */
   live: boolean;
+}
+
+/**
+ * What kind of thing an action produced — this picks the icon on the phone.
+ * The demo has to fit a coach, a baker and a web developer equally well, so
+ * the actions are written per business rather than assumed to be appointments.
+ */
+export type ActKind = "mail" | "calendar" | "box" | "list";
+
+export interface Act {
+  text: string;
+  kind: ActKind;
 }
 
 export interface Run {
