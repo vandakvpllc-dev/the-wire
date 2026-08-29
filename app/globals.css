@@ -1,49 +1,178 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ground */
+  --paper: #FBF9F6;
+  --card: #FFFFFF;
+  --sunk: #F5F2EE;
+
+  /* lines */
+  --line: #E7E2DA;
+  --line-soft: #EFEBE4;
+  --line-hard: #D8D2C8;
+  --dashed: #C9C3BA;
+
+  /* ink */
+  --ink: #1B1A16;
+  --ink-2: #37342E;
+  --ink-3: #4A463F;
+  --muted: #6B655D;
+  --faint: #8C857C;
+  --fainter: #A8A199;
+
+  /* money — the only accent. grey when dead, green when money moves */
+  --money: #0B7A3E;
+  --money-bright: #14A05C;
+  --money-wash: #E9F5EE;
+  --money-wash-2: #F3FAF6;
+  --money-line: #B9DEC9;
+
+  /* loss */
+  --loss: #B4442F;
+  --loss-wash: #FBEFEC;
+  --loss-line: #EDCFC7;
+
+  --shadow-sm: 0 1px 2px rgba(27, 26, 22, 0.04);
+  --shadow-md: 0 3px 6px rgba(27, 26, 22, 0.05), 0 20px 46px rgba(27, 26, 22, 0.1);
+  --shadow-money: 0 2px 4px rgba(11, 122, 62, 0.16), 0 10px 26px rgba(11, 122, 62, 0.14);
+
+  --serif: var(--font-serif), Georgia, "Times New Roman", serif;
+  --sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+img {
+  max-width: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input {
+  font: inherit;
+  color: inherit;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--money);
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+a:hover {
+  color: var(--money-bright);
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+.serif {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+/* the demo runs long-form; never let a wide row scroll the page */
+.scroll-x {
+  overflow-x: auto;
+}
+
+@keyframes livePulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes moneyLand {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.97);
+  }
+  60% {
+    transform: translateY(2px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.pulse {
+  animation: livePulse 1.4s ease-in-out infinite;
+}
+
+.caret {
+  animation: caret 1s step-end infinite;
+}
+
+.rise {
+  animation: riseIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.land {
+  animation: moneyLand 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse,
+  .caret,
+  .rise,
+  .land {
+    animation: none;
   }
 }

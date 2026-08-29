@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; font-family: Archivo, "Helvetica Neue", sans-serif; }
+    a { color: #0B7A3E; } a:hover { color: #14A05C; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+    .serif { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; height: 1120px; background: #FBF9F6; color: #1B1A16; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 32px; padding: 40px 48px 44px 48px; box-sizing: border-box;">
+
+  <!-- header -->
+  <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 50px;">
+    <div style="display: flex; flex-direction: column; gap: 7px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B7A3E" stroke-width="1.7" stroke-linecap="round"><path d="M4 12h5"/><path d="M15 12h5"/><circle cx="11" cy="12" r="2"/><path d="M13 12h0.5"/></svg>
+        <span class="mono" style="font-size: 12px; letter-spacing: 0.22em;">THE WIRE</span>
+      </div>
+      <span class="serif" style="font-size: 46px; line-height: 1.04; letter-spacing: -0.01em;">How the thing is actually built.</span>
+      <span style="font-size: 14px; color: #6B655D; line-height: 1.5;">No jargon. This page is for you, not for them.</span>
+    </div>
+    <span class="mono" style="font-size: 11px; letter-spacing: 0.18em; color: #A8A199; padding-bottom: 6px;">BLUEPRINT</span>
+  </div>
+
+  <!-- flow -->
+  <div style="display: flex; flex-direction: column; gap: 18px;">
+    <span class="mono" style="font-size: 10px; letter-spacing: 0.18em; color: #A8A199;">WHAT HAPPENS, START TO FINISH</span>
+
+    <div style="position: relative;">
+      <div style="position: absolute; left: 104px; right: 104px; top: 6px; height: 2px; background: linear-gradient(90deg, #D8D2C8, #0B7A3E);"></div>
+
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; position: relative;">
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+          <div style="width: 11px; height: 11px; border-radius: 50%; background: #C9C3BA; margin-top: 1px;"></div>
+          <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 15px 15px; display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
+            <span class="mono" style="font-size: 10px; color: #A8A199;">01</span>
+            <span style="font-size: 13.5px; font-weight: 600; line-height: 1.3;">They open your link</span>
+            <span style="font-size: 11.5px; color: #6B655D; line-height: 1.45;">A web page. Nothing to install, nothing to sign up for, nothing to cancel.</span>
+            <span class="mono" style="font-size: 9.5px; color: #A8A199; letter-spacing: 0.08em;">FREE</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+          <div style="width: 11px; height: 11px; border-radius: 50%; background: #BDB6AC; margin-top: 1px;"></div>
+          <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 15px 15px; display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
+            <span class="mono" style="font-size: 10px; color: #A8A199;">02</span>
+            <span style="font-size: 13.5px; font-weight: 600; line-height: 1.3;">They fill in five boxes</span>
+            <span style="font-size: 11.5px; color: #6B655D; line-height: 1.45;">Name, email, mobile, what they sell, what they charge. That's the whole onboarding.</span>
+            <span class="mono" style="font-size: 9.5px; color: #A8A199; letter-spacing: 0.08em;">30 SECONDS</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+          <div style="width: 11px; height: 11px; border-radius: 50%; background: #9FAF9C; margin-top: 1px;"></div>
+          <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 15px 15px; display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
+            <span class="mono" style="font-size: 10px; color: #A8A199;">03</span>
+            <span style="font-size: 13.5px; font-weight: 600; line-height: 1.3;">It rebuilds itself around them</span>
+            <span style="font-size: 11.5px; color: #6B655D; line-height: 1.45;">Their name, their service, their price on every screen from here on. Never a generic demo.</span>
+            <span class="mono" style="font-size: 9.5px; color: #A8A199; letter-spacing: 0.08em;">PERSONAL</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+          <div style="width: 11px; height: 11px; border-radius: 50%; background: #6E9C7E; margin-top: 1px;"></div>
+          <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 15px 15px; display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
+            <span class="mono" style="font-size: 10px; color: #A8A199;">04</span>
+            <span style="font-size: 13.5px; font-weight: 600; line-height: 1.3;">They pull the trigger</span>
+            <span style="font-size: 11.5px; color: #6B655D; line-height: 1.45;">They buy from themselves for $250, in test mode. No card is ever charged.</span>
+            <span class="mono" style="font-size: 9.5px; color: #A8A199; letter-spacing: 0.08em;">THE HOOK</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+          <div style="width: 11px; height: 11px; border-radius: 50%; background: #3A8C5B; margin-top: 1px;"></div>
+          <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 15px 15px; display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box;">
+            <span class="mono" style="font-size: 10px; color: #A8A199;">05</span>
+            <span style="font-size: 13.5px; font-weight: 600; line-height: 1.3;">Your server runs the five parts</span>
+            <span style="font-size: 11.5px; color: #6B655D; line-height: 1.45;">Catch it, write it down, let the AI judge it, act on it — every step printed on screen as it goes.</span>
+            <span class="mono" style="font-size: 9.5px; color: #A8A199; letter-spacing: 0.08em;">YOUR CODE</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+          <div style="width: 13px; height: 13px; border-radius: 50%; background: #0B7A3E; margin-top: 0; box-shadow: 0 0 0 6px rgba(11,122,62,0.12);"></div>
+          <div style="background: #E9F5EE; border: 1.5px solid #0B7A3E; border-radius: 4px; padding: 14px 14px; display: flex; flex-direction: column; gap: 6px; width: 100%; box-sizing: border-box; box-shadow: 0 2px 4px rgba(11,122,62,0.08);">
+            <span class="mono" style="font-size: 10px; color: #0B7A3E;">06</span>
+            <span style="font-size: 13.5px; font-weight: 600; line-height: 1.3;">Their phone shows +$250</span>
+            <span style="font-size: 11.5px; color: #37342E; line-height: 1.45;">Green, in their hand, with their customer's name on it. This is the whole product.</span>
+            <span class="mono" style="font-size: 9.5px; color: #0B7A3E; letter-spacing: 0.08em;">THE MOMENT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- folder + right column -->
+  <div style="display: grid; grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr); gap: 38px; flex-grow: 1;">
+
+    <!-- repo -->
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <span class="mono" style="font-size: 10px; letter-spacing: 0.18em; color: #A8A199;">WHAT'S IN THE FOLDER</span>
+
+      <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 22px 24px; display: flex; flex-direction: column; gap: 9px; flex-grow: 1;">
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #0B7A3E;">the-wire/</span>
+          <span style="font-size: 11.5px; color: #A8A199;">the whole thing, one folder</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ app/page.tsx</span>
+          <span style="font-size: 11.5px; color: #6B655D;">the demo itself — all five screens</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ app/api/start.ts</span>
+          <span style="font-size: 11.5px; color: #6B655D;">takes their five answers and builds their system</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #0B7A3E; font-weight: 500;">├─ app/api/fire.ts</span>
+          <span style="font-size: 11.5px; color: #4A463F;">runs the five parts when they pull the trigger — <span style="color: #0B7A3E; font-weight: 500;">the heart of it</span></span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ app/api/notify.ts</span>
+          <span style="font-size: 11.5px; color: #6B655D;">sends the green +$250 to their phone</span>
+        </div>
+
+        <div style="height: 6px;"></div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ components/Form.tsx</span>
+          <span style="font-size: 11.5px; color: #6B655D;">the five boxes — name, email, mobile, sell, price</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ components/Map.tsx</span>
+          <span style="font-size: 11.5px; color: #6B655D;">the map of everything they own, unconnected</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ components/Pulse.tsx</span>
+          <span style="font-size: 11.5px; color: #6B655D;">the green light travelling down the wire</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ components/Console.tsx</span>
+          <span style="font-size: 11.5px; color: #6B655D;">the live log with timestamps</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ components/Phone.tsx</span>
+          <span style="font-size: 11.5px; color: #6B655D;">the phone drawn beside the screen</span>
+        </div>
+
+        <div style="height: 6px;"></div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #0B7A3E; font-weight: 500;">├─ lib/money.ts</span>
+          <span style="font-size: 11.5px; color: #4A463F;">puts <span style="color: #0B7A3E; font-weight: 500;">their price, in green</span>, on every screen</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ lib/anatomy.ts</span>
+          <span style="font-size: 11.5px; color: #6B655D;">the five parts, in order — this is the teaching</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #37342E;">├─ lib/mail.ts</span>
+          <span style="font-size: 11.5px; color: #6B655D;">the free half of the buzz — email to their phone</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 18px;">
+          <span class="mono" style="font-size: 12.5px; color: #0B7A3E; font-weight: 500;">└─ lib/leads.ts</span>
+          <span style="font-size: 11.5px; color: #4A463F;">everyone who ran it — <span style="color: #0B7A3E; font-weight: 500;">this is your list</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- costs + notes -->
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <span class="mono" style="font-size: 10px; letter-spacing: 0.18em; color: #A8A199;">WHAT IT COSTS YOU TO RUN</span>
+
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px;">
+        <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 16px 17px; display: flex; flex-direction: column; gap: 5px;">
+          <span class="mono" style="font-size: 24px; line-height: 1;">$0</span>
+          <span style="font-size: 12.5px; font-weight: 600;">Hosting</span>
+          <span style="font-size: 11.5px; color: #6B655D; line-height: 1.45;">Vercel's free tier carries this comfortably.</span>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 16px 17px; display: flex; flex-direction: column; gap: 5px;">
+          <span class="mono" style="font-size: 24px; line-height: 1;">$0</span>
+          <span style="font-size: 12.5px; font-weight: 600;">The email buzz</span>
+          <span style="font-size: 11.5px; color: #6B655D; line-height: 1.45;">Free tier covers thousands. Lands on their phone in seconds.</span>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 16px 17px; display: flex; flex-direction: column; gap: 5px;">
+          <span class="mono" style="font-size: 24px; line-height: 1;">~2¢</span>
+          <span style="font-size: 12.5px; font-weight: 600;">The AI decision</span>
+          <span style="font-size: 11.5px; color: #6B655D; line-height: 1.45;">Per <span style="font-weight: 600;">hundred</span> people who run it. Not per person.</span>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 16px 17px; display: flex; flex-direction: column; gap: 5px;">
+          <span class="mono" style="font-size: 24px; line-height: 1;">~1¢</span>
+          <span style="font-size: 12.5px; font-weight: 600;">A real text message</span>
+          <span style="font-size: 11.5px; color: #6B655D; line-height: 1.45;">Optional. About $10 for a thousand people — your only real cost.</span>
+        </div>
+      </div>
+
+      <div style="background: #E9F5EE; border: 1px solid #B9DEC9; border-radius: 4px; padding: 19px 20px; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0B7A3E" stroke-width="1.8" stroke-linecap="round"><path d="M13 2.5 4 14h6.5L11 21.5 20 10h-6.5z"/></svg>
+          <span class="mono" style="font-size: 10px; letter-spacing: 0.16em; color: #0B7A3E;">WHY NOBODY GETS CHARGED</span>
+        </div>
+        <span style="font-size: 13px; color: #37342E; line-height: 1.55; text-wrap: pretty;">The $250 runs through a <span style="font-weight: 600;">test payment</span> — a real link and a real flow with no card behind it. The money notification that follows is completely real; the charge is the only thing that isn't. That's what lets you hand this to a thousand strangers without a single one of them spending a cent.</span>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 19px 20px; display: flex; flex-direction: column; gap: 9px; margin-top: auto;">
+        <span class="mono" style="font-size: 10px; letter-spacing: 0.16em; color: #A8A199;">AND WHAT YOU GET OUT OF IT</span>
+        <span style="font-size: 13px; color: #37342E; line-height: 1.55; text-wrap: pretty;">Nobody reaches the green screen without giving you all five answers first. So every finished run drops a lead in your sheet with their name, email, mobile, what they sell — and <span style="font-weight: 600;">what they charge for it</span>.</span>
+        <span style="font-size: 13px; color: #6B655D; line-height: 1.55; text-wrap: pretty;">That last box is the quiet one. It tells you, before you ever speak to them, exactly who can afford you.</span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

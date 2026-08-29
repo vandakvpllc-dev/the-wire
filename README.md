@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Wire
 
-## Getting Started
+A five-screen demo that shows a business owner the difference between **AI automation**
+and **an AI system** — by running one on their own business while they watch, and putting
+a green **+$450.00** on their phone at the end of it.
 
-First, run the development server:
+## What a visitor experiences
+
+1. **Five boxes.** Name, email, mobile, what they sell, what they charge. Thirty seconds.
+   The price box is the one that turns everything after it green.
+2. **What you have now.** Their assets drawn as disconnected parts, every wire hanging
+   loose. *You are the wire.*
+3. **How it actually works.** The five parts every AI system has — **TRIGGER → CAPTURE →
+   DECIDE → ACT → NOTIFY** — then the reveal: ChatGPT is part three, and only part three.
+4. **They pull the trigger.** A test payment for their own price. The pulse travels the
+   rail, the log prints every step with real timestamps, and their phone buzzes.
+5. **The difference.** Same money, two worlds. Closes on: *$250 today either way. $0 on
+   Wednesday with a smart pen — **+$250** on Wednesday with a system.*
+
+## The one rule this codebase is built around
+
+**The notification is sent before the animation starts.** `app/api/fire/route.ts`
+dispatches to the phone and does *not* await it, then paces the screen at ~850ms a step
+for about six seconds. The phone can only ever be early. **Early reads as magic. Late
+reads as broken.**
+
+Two things follow from that:
+
+- The AI copy is generated at `/api/start`, while they read screens 2 and 3 — about forty
+  seconds of runway — and cached on the client. The trigger never waits on a model, and
+  `lib/personalize.ts` has a hand-written fallback that ships fine on its own.
+- The timestamps in the log are the true machine times (tenths of a second). The reveal is
+  slower than the truth so a human can read it, and the screen says so rather than
+  pretending otherwise.
+
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # every line is optional
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+With no environment variables at all the demo runs end to end and states plainly on screen
+that the send didn't go out. Nothing fails silently.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What's in the folder
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/page.tsx              the five screens, and the state machine between them
+app/api/start/route.ts    banks the lead, starts writing their copy
+app/api/fire/route.ts     the trigger — sends first, then streams the five parts
+components/Rail.tsx       the five stations. always five across, at every width
+components/Live.tsx       the money screen: log, phone, and the stream reader
+components/Phone.tsx      no fake status bar — the real one renders on top
+lib/anatomy.ts            the five parts, in order. this is the teaching
+lib/money.ts              their price, formatted, everywhere
+lib/notify/               sms, email, and the .ics invite
+lib/leads.ts              everyone who ran it — this is the list
+```
 
-## Learn More
+## What it costs to run
 
-To learn more about Next.js, take a look at the following resources:
+| | |
+|---|---|
+| Hosting | **$0** — Vercel's free tier carries this |
+| Email buzz | **$0** — free tier covers thousands |
+| AI personalisation | **~2¢** per *hundred* runs |
+| A real text message | **~1¢ each** — optional, and the only real cost |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Why nobody gets charged
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The payment is a **test payment** — a real link and a real flow with no card behind it.
+The notification that follows is completely real; the charge is the only thing that isn't.
+That's what lets this go to a thousand strangers without one of them spending a cent.
 
-## Deploy on Vercel
+## No OAuth, on purpose
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+An earlier design signed people in with Google so it could write to their calendar.
+That puts Google's "this app wants to manage your calendar" consent screen directly in
+front of the payoff — the worst possible place for a wall. The demo only ever sends *to*
+them, so it needs no permissions at all, and the calendar invite rides along as a one-tap
+`.ics` attachment. OAuth belongs in the paid product, when they're wiring their real
+business.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Known gaps
+
+- The responsive breakpoints (720px / 1040px) are written but have not been verified on a
+  real phone. Worth ten minutes with an actual device before this goes out.
+- On a phone the "look down at your hand" beat changes — `components/Live.tsx` detects it
+  and swaps the line — but that alternate path is also unverified on hardware.

@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; font-family: Archivo, "Helvetica Neue", sans-serif; }
+    a { color: #0B7A3E; } a:hover { color: #14A05C; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+    .serif { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; height: 900px; background: #FBF9F6; color: #1B1A16; position: relative; overflow: hidden; display: flex; flex-direction: column;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 28px 48px 0 48px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B7A3E" stroke-width="1.7" stroke-linecap="round"><path d="M4 12h5"/><path d="M15 12h5"/><circle cx="11" cy="12" r="2"/><path d="M13 12h0.5"/></svg>
+      <span class="mono" style="font-size: 12px; letter-spacing: 0.22em;">THE WIRE</span>
+    </div>
+    <span class="mono" style="font-size: 11px; letter-spacing: 0.18em; color: #A8A199;">STEP 2 OF 5 — WHAT YOU HAVE NOW</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 336px minmax(0, 1fr); gap: 46px; padding: 30px 48px 0 48px; flex-grow: 1;">
+
+    <!-- left rail -->
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <span class="mono" style="font-size: 10px; letter-spacing: 0.18em; color: #A8A199;">DENISE, HERE'S WHAT YOU ALREADY OWN</span>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 12px 14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A8A199" stroke-width="1.5"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10.5h20"/></svg>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1;">
+            <span style="font-size: 13px; font-weight: 500;">Your $250 payment link</span>
+            <span class="mono" style="font-size: 10.5px; color: #A8A199;">buy.stripe.com/…</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 12px 14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A8A199" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1;">
+            <span style="font-size: 13px; font-weight: 500;">Your booking link</span>
+            <span class="mono" style="font-size: 10.5px; color: #A8A199;">calendly.com/…</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 12px 14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A8A199" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1;">
+            <span style="font-size: 13px; font-weight: 500;">Your website</span>
+            <span class="mono" style="font-size: 10.5px; color: #A8A199;">[HER DOMAIN].com</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 12px 14px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A8A199" stroke-width="1.5"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-4.2-1L3 20.5l1.7-4.6A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/></svg>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1;">
+            <span style="font-size: 13px; font-weight: 500;">Your DMs and your inbox</span>
+            <span class="mono" style="font-size: 10.5px; color: #A8A199;">instagram · gmail</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 26px; padding: 2px 2px;">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span class="mono" style="font-size: 32px; line-height: 1;">4</span>
+          <span style="font-size: 12px; color: #6B655D;">things you own</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span class="mono" style="font-size: 32px; color: #B4442F; line-height: 1;">0</span>
+          <span style="font-size: 12px; color: #6B655D;">wires between them</span>
+        </div>
+      </div>
+
+      <div style="background: #FBEFEC; border: 1px solid #EDCFC7; border-radius: 4px; padding: 18px 18px; display: flex; flex-direction: column; gap: 9px;">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B4442F" stroke-width="1.8" stroke-linecap="round"><path d="M12 8.5v5"/><circle cx="12" cy="17" r="0.6" fill="#B4442F"/><path d="M10.3 3.9 2.6 17.5A1.9 1.9 0 0 0 4.3 20.4h15.4a1.9 1.9 0 0 0 1.7-2.9L13.7 3.9a1.9 1.9 0 0 0-3.4 0z"/></svg>
+          <span class="mono" style="font-size: 10px; letter-spacing: 0.16em; color: #B4442F;">WHERE THE MONEY GOES</span>
+        </div>
+        <span style="font-size: 13.5px; color: #37342E; line-height: 1.55; text-wrap: pretty;">A <span style="font-weight: 600;">$250</span> payment landing in your account is the <span style="font-weight: 600;">beginning</span> of a relationship worth several thousand. Right now it's the end of one — because the moment the money arrives, nothing else happens.</span>
+      </div>
+    </div>
+
+    <!-- map -->
+    <div style="position: relative;">
+
+      <svg width="100%" height="520" viewBox="0 0 986 520" fill="none" style="position: absolute; inset: 0;">
+        <g stroke="#D8D2C8" stroke-width="1.5" stroke-dasharray="4 6" stroke-linecap="round">
+          <path d="M208 84 C 268 84, 274 116, 306 120"/>
+          <path d="M502 62 C 550 62, 556 100, 592 104"/>
+          <path d="M768 152 C 768 194, 732 204, 702 210"/>
+          <path d="M244 372 C 296 372, 304 350, 334 344"/>
+          <path d="M664 398 C 710 398, 718 372, 748 366"/>
+        </g>
+        <g fill="#FBF9F6" stroke="#C9C3BA" stroke-width="1.5">
+          <circle cx="308" cy="120" r="3.5"/>
+          <circle cx="594" cy="104" r="3.5"/>
+          <circle cx="700" cy="211" r="3.5"/>
+          <circle cx="336" cy="343" r="3.5"/>
+          <circle cx="750" cy="365" r="3.5"/>
+        </g>
+      </svg>
+
+      <!-- payment link node, the money one -->
+      <div style="position: absolute; left: 8px; top: 42px; width: 200px; background: #FFFFFF; border: 1px solid #EDCFC7; border-radius: 4px; padding: 14px 15px; display: flex; flex-direction: column; gap: 5px; box-shadow: 0 1px 2px rgba(27,26,22,0.04);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span class="mono" style="font-size: 9.5px; letter-spacing: 0.14em; color: #A8A199;">PAYMENT LINK</span>
+          <span class="mono" style="font-size: 11px; color: #0B7A3E;">+$250</span>
+        </div>
+        <span style="font-size: 14px; font-weight: 600;">Money arrives</span>
+        <span style="font-size: 11.5px; color: #B4442F;">Then absolutely nothing.</span>
+      </div>
+
+      <div style="position: absolute; left: 306px; top: 24px; width: 200px; background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 14px 15px; display: flex; flex-direction: column; gap: 5px; box-shadow: 0 1px 2px rgba(27,26,22,0.04);">
+        <span class="mono" style="font-size: 9.5px; letter-spacing: 0.14em; color: #A8A199;">BOOKING LINK</span>
+        <span style="font-size: 14px; font-weight: 600;">Someone books</span>
+        <span style="font-size: 11.5px; color: #8C857C;">It tells no one. Not even you.</span>
+      </div>
+
+      <div style="position: absolute; left: 670px; top: 78px; width: 200px; background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 14px 15px; display: flex; flex-direction: column; gap: 5px; box-shadow: 0 1px 2px rgba(27,26,22,0.04);">
+        <span class="mono" style="font-size: 9.5px; letter-spacing: 0.14em; color: #A8A199;">WEBSITE</span>
+        <span style="font-size: 14px; font-weight: 600;">People visit</span>
+        <span style="font-size: 11.5px; color: #8C857C;">Nothing ever leaves it.</span>
+      </div>
+
+      <div style="position: absolute; left: 48px; top: 336px; width: 200px; background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 14px 15px; display: flex; flex-direction: column; gap: 5px; box-shadow: 0 1px 2px rgba(27,26,22,0.04);">
+        <span class="mono" style="font-size: 9.5px; letter-spacing: 0.14em; color: #A8A199;">YOUR DMS</span>
+        <span style="font-size: 14px; font-weight: 600;">They ask</span>
+        <span style="font-size: 11.5px; color: #8C857C;">You answer. At 11pm. Yourself.</span>
+      </div>
+
+      <div style="position: absolute; left: 468px; top: 364px; width: 200px; background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 14px 15px; display: flex; flex-direction: column; gap: 5px; box-shadow: 0 1px 2px rgba(27,26,22,0.04);">
+        <span class="mono" style="font-size: 9.5px; letter-spacing: 0.14em; color: #A8A199;">YOUR INBOX</span>
+        <span style="font-size: 14px; font-weight: 600;">Everything lands</span>
+        <span style="font-size: 11.5px; color: #8C857C;">And then gets buried.</span>
+      </div>
+
+      <!-- the human -->
+      <div style="position: absolute; left: 372px; top: 172px; width: 262px; background: #FFFFFF; border: 1.5px solid #1B1A16; border-radius: 4px; padding: 18px 20px; display: flex; flex-direction: column; gap: 7px; box-shadow: 0 4px 8px rgba(27,26,22,0.06), 0 20px 46px rgba(27,26,22,0.10);">
+        <div style="display: flex; align-items: center; gap: 9px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B1A16" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c1.2-4 4-6 7.5-6s6.3 2 7.5 6"/></svg>
+          <span class="mono" style="font-size: 9.5px; letter-spacing: 0.14em;">THE ONLY WIRE IN THIS PICTURE</span>
+        </div>
+        <span style="font-size: 21px; font-weight: 600;">Denise</span>
+        <span style="font-size: 12.5px; color: #6B655D; line-height: 1.5;">Copying, pasting and remembering, by hand, every single time — and only while awake.</span>
+      </div>
+
+      <!-- silent phone -->
+      <div style="position: absolute; left: 752px; top: 316px; width: 200px; background: #F5F2EE; border: 1px dashed #C9C3BA; border-radius: 4px; padding: 14px 15px; display: flex; flex-direction: column; gap: 5px;">
+        <span class="mono" style="font-size: 9.5px; letter-spacing: 0.14em; color: #A8A199;">YOUR PHONE</span>
+        <span style="font-size: 14px; font-weight: 600; color: #8C857C;">Silent</span>
+        <span style="font-size: 11.5px; color: #A8A199;">Nothing here can reach it.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- punchline -->
+  <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 44px; padding: 0 48px 36px 48px;">
+    <div style="display: flex; flex-direction: column; gap: 7px; max-width: 800px;">
+      <span class="serif" style="font-size: 62px; line-height: 1; letter-spacing: -0.01em;">You are the wire.</span>
+      <span style="font-size: 14.5px; color: #6B655D; line-height: 1.55; text-wrap: pretty;">You don't have a system. You have four things that each work alone and a person carrying messages between them. That person is you, and you're the part that gets tired, forgets, and sleeps.</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; background: #0B7A3E; color: #FFFFFF; border-radius: 4px; padding: 16px 26px; flex-shrink: 0; box-shadow: 0 2px 4px rgba(11,122,62,0.16), 0 10px 26px rgba(11,122,62,0.14);">
+      <span style="font-size: 15px; font-weight: 600;">Show me the wire</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,519 @@
+/* ------------------------------------------------------------------ shell */
+
+.screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 26px clamp(18px, 3.4vw, 48px) clamp(28px, 4vw, 44px);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+}
+
+.stepLabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--fainter);
+  text-align: right;
+}
+
+.live {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--money);
+}
+
+/* --------------------------------------------------------------- typography */
+
+.h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(34px, 5.1vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.lede {
+  font-size: clamp(14px, 1.15vw, 15px);
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 68ch;
+  text-wrap: pretty;
+  margin: 0;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--fainter);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------------------------------------------------------- form */
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field > label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--fainter);
+}
+
+.field input {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 14px 16px;
+  font-size: 16px; /* 16px keeps iOS from zooming the page on focus */
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.field input:focus {
+  border-color: var(--ink);
+}
+
+.field.moneyField > label {
+  color: var(--money);
+}
+
+.field.moneyField input {
+  border: 1.5px solid var(--money);
+  padding: 13px 16px;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(11, 122, 62, 0.08);
+}
+
+.field.moneyField .withSign {
+  position: relative;
+}
+
+.field.moneyField .withSign span {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--money);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.field.moneyField .withSign input {
+  padding-left: 30px;
+}
+
+.field .err {
+  font-size: 12px;
+  color: var(--loss);
+}
+
+/* ---------------------------------------------------------------- buttons */
+
+.go {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--money);
+  color: #fff;
+  border-radius: 4px;
+  padding: 16px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: var(--shadow-money);
+  transition: transform 0.12s, filter 0.12s;
+  min-height: 52px;
+}
+
+.go:hover {
+  filter: brightness(1.06);
+}
+
+.go:active {
+  transform: translateY(1px);
+}
+
+.go[disabled] {
+  opacity: 0.55;
+  cursor: default;
+  filter: none;
+  transform: none;
+}
+
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line-hard);
+  border-radius: 4px;
+  padding: 14px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  min-height: 48px;
+}
+
+.ghost:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------------ cards */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.cardMoney {
+  background: var(--card);
+  border: 1.5px solid var(--money);
+  border-radius: 4px;
+  box-shadow: 0 3px 6px rgba(11, 122, 62, 0.08), 0 20px 46px rgba(11, 122, 62, 0.1);
+}
+
+/* ------------------------------------------------------------------- rail */
+
+.rail {
+  position: relative;
+}
+
+.railLine,
+.railFill {
+  position: absolute;
+  top: 19px;
+  height: 2px;
+}
+
+.railLine {
+  left: 8%;
+  right: 8%;
+  background: var(--line-hard);
+}
+
+.railFill {
+  left: 8%;
+  background: linear-gradient(90deg, var(--money), var(--money-bright));
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.railGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(8px, 1.6vw, 26px);
+  position: relative;
+}
+
+.station {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  text-align: center;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-top: 13px;
+  background: var(--paper);
+  border: 2px solid var(--dashed);
+  box-sizing: border-box;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.dot.on {
+  background: var(--money);
+  border-color: var(--money);
+}
+
+.dot.now {
+  background: var(--money-bright);
+  border-color: var(--money-bright);
+  box-shadow: 0 0 0 7px rgba(11, 122, 62, 0.16);
+}
+
+.stationName {
+  font-family: var(--mono);
+  font-size: clamp(9px, 1vw, 11.5px);
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+
+.stationName.on {
+  color: var(--ink);
+}
+
+.stationSub {
+  font-family: var(--mono);
+  font-size: clamp(8.5px, 0.85vw, 10.5px);
+  color: var(--fainter);
+}
+
+/* ---------------------------------------------------------------- console */
+
+.logRow {
+  display: grid;
+  grid-template-columns: 74px 70px minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  font-family: var(--mono);
+}
+
+.logTime {
+  font-size: 11.5px;
+  color: var(--fainter);
+}
+
+.logPart {
+  font-size: 11.5px;
+  color: var(--money);
+  letter-spacing: 0.06em;
+}
+
+.logText {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------------ phone */
+
+.phone {
+  width: min(292px, 100%);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 38px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-md);
+}
+
+.notif {
+  background: var(--sunk);
+  border-radius: 14px;
+  padding: 13px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.notif.money {
+  background: var(--money-wash);
+  border: 1px solid var(--money-line);
+}
+
+.notif.waiting {
+  background: var(--paper);
+  border: 1px dashed var(--dashed);
+}
+
+.notifHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.notifWhen {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--fainter);
+  margin-left: auto;
+}
+
+.notifAmount {
+  font-family: var(--mono);
+  font-size: 27px;
+  color: var(--money);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.notifBody {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+.appIcon {
+  width: 17px;
+  height: 17px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------------- grids */
+
+.two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.2vw, 30px);
+}
+
+.five {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 30px);
+}
+
+.liveSplit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 306px;
+  gap: clamp(20px, 3vw, 44px);
+  align-items: start;
+}
+
+.formSplit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 452px;
+  gap: clamp(24px, 4vw, 68px);
+  align-items: start;
+}
+
+.stats {
+  display: flex;
+  gap: clamp(20px, 3vw, 34px);
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.statNum {
+  font-family: var(--mono);
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1;
+}
+
+.statLabel {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  color: var(--fainter);
+}
+
+/* ------------------------------------------------------------ breakpoints */
+
+@media (max-width: 1040px) {
+  .liveSplit,
+  .formSplit {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .phoneCol {
+    display: flex;
+    justify-content: center;
+  }
+
+  .five {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The rail is the teaching device — it stays five-across at every width. */
+  .railGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .two,
+  .formGrid,
+  .five {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .logRow {
+    grid-template-columns: 62px minmax(0, 1fr);
+    row-gap: 2px;
+  }
+
+  .logPart {
+    grid-column: 2;
+  }
+
+  .logText {
+    grid-column: 2;
+  }
+
+  .railLine,
+  .railFill {
+    left: 10%;
+  }
+
+  .railLine {
+    right: 10%;
+  }
+
+  .stationSub {
+    display: none;
+  }
+
+  .stepLabel {
+    display: none;
+  }
+}

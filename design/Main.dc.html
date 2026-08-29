@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; font-family: Archivo, "Helvetica Neue", sans-serif; }
+    a { color: #0B7A3E; } a:hover { color: #14A05C; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+    .serif { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; height: 900px; background: #FBF9F6; color: #1B1A16; position: relative; overflow: hidden; display: flex; flex-direction: column;">
+
+  <div style="position: absolute; inset: 0; background: radial-gradient(760px 520px at 88% 40%, rgba(11,122,62,0.05), transparent 70%); pointer-events: none;"></div>
+
+  <!-- header -->
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 28px 48px 0 48px; position: relative;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B7A3E" stroke-width="1.7" stroke-linecap="round"><path d="M4 12h5"/><path d="M15 12h5"/><circle cx="11" cy="12" r="2"/><path d="M13 12h0.5"/></svg>
+      <span class="mono" style="font-size: 12px; letter-spacing: 0.22em;">THE WIRE</span>
+    </div>
+    <span class="mono" style="font-size: 11px; letter-spacing: 0.18em; color: #A8A199;">STEP 1 OF 5 — THIRTY SECONDS</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: minmax(0, 1fr) 452px; gap: 68px; padding: 44px 48px 0 48px; position: relative; flex-grow: 1;">
+
+    <!-- form side -->
+    <div style="display: flex; flex-direction: column; gap: 30px;">
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span class="serif" style="font-size: 58px; line-height: 1.02; letter-spacing: -0.01em;">Five boxes. Then watch<br>your own business run itself.</span>
+        <span style="font-size: 15px; color: #6B655D; line-height: 1.55; max-width: 640px; text-wrap: pretty;">No credit card, no software to install, nothing to cancel later. Fill this in and the next four screens are built out of your answers — your service, your price, your phone.</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;">
+            <span class="mono" style="font-size: 10px; letter-spacing: 0.16em; color: #A8A199;">FIRST NAME</span>
+            <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 14px 16px; font-size: 15px; box-shadow: 0 1px 2px rgba(27,26,22,0.03);">Denise</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 7px;">
+            <span class="mono" style="font-size: 10px; letter-spacing: 0.16em; color: #A8A199;">EMAIL</span>
+            <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 14px 16px; font-size: 15px; box-shadow: 0 1px 2px rgba(27,26,22,0.03);">denise@[HER DOMAIN].com</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px;">
+          <div style="display: flex; flex-direction: column; gap: 7px;">
+            <span class="mono" style="font-size: 10px; letter-spacing: 0.16em; color: #A8A199;">MOBILE — SO IT CAN REACH YOU</span>
+            <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 14px 16px; font-size: 15px; box-shadow: 0 1px 2px rgba(27,26,22,0.03);">(214) 555-0148</div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 7px;">
+            <span class="mono" style="font-size: 10px; letter-spacing: 0.16em; color: #0B7A3E;">WHAT DO YOU CHARGE FOR IT?</span>
+            <div style="background: #FFFFFF; border: 1.5px solid #0B7A3E; border-radius: 4px; padding: 13px 16px; font-size: 15px; display: flex; align-items: center; gap: 3px; box-shadow: 0 1px 2px rgba(11,122,62,0.08);">
+              <span style="color: #0B7A3E; font-weight: 600;">$</span>
+              <span style="font-weight: 600;">250</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span class="mono" style="font-size: 10px; letter-spacing: 0.16em; color: #A8A199;">WHAT DO YOU SELL?</span>
+          <div style="background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 4px; padding: 14px 16px; font-size: 15px; box-shadow: 0 1px 2px rgba(27,26,22,0.03);">A one-hour placement consultation</div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 12px; background: #0B7A3E; color: #FFFFFF; border-radius: 4px; padding: 17px 30px; box-shadow: 0 2px 4px rgba(11,122,62,0.16), 0 10px 26px rgba(11,122,62,0.14);">
+          <span style="font-size: 15.5px; font-weight: 600;">Build my system</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+        </div>
+        <span style="font-size: 12.5px; color: #A8A199; line-height: 1.5;">Takes about 90 seconds.<br>Nothing is charged and nothing is sold to you.</span>
+      </div>
+    </div>
+
+    <!-- teaser side -->
+    <div style="display: flex; flex-direction: column; gap: 18px; align-items: center; padding-top: 6px;">
+
+      <span class="mono" style="font-size: 10px; letter-spacing: 0.18em; color: #A8A199; align-self: flex-start;">IN ABOUT NINETY SECONDS, THIS IS YOUR PHONE</span>
+
+      <div style="width: 296px; height: 588px; background: #FFFFFF; border: 1px solid #E7E2DA; border-radius: 30px; padding: 44px 15px 18px 15px; display: flex; flex-direction: column; gap: 11px; box-shadow: 0 3px 6px rgba(27,26,22,0.05), 0 30px 70px rgba(27,26,22,0.13);">
+
+        <div style="background: #E9F5EE; border: 1px solid #B9DEC9; border-radius: 14px; padding: 15px 16px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 17px; height: 17px; border-radius: 5px; background: #0B7A3E; display: flex; align-items: center; justify-content: center;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"><path d="M12 4v16M8.5 7.5h6.5a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h6.5"/></svg>
+            </div>
+            <span style="font-size: 11px; color: #6B655D;">Payments</span>
+            <span class="mono" style="font-size: 10px; color: #A8A199; margin-left: auto;">now</span>
+          </div>
+          <span class="mono" style="font-size: 27px; color: #0B7A3E; font-weight: 500; line-height: 1;">+$250.00</span>
+          <span style="font-size: 12.5px; color: #37342E; line-height: 1.4;">Maria Ruiz paid for a one-hour placement consultation.</span>
+        </div>
+
+        <div style="background: #F5F2EE; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 17px; height: 17px; border-radius: 5px; background: #C4BDB3; display: flex; align-items: center; justify-content: center;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16"/></svg>
+            </div>
+            <span style="font-size: 11px; color: #6B655D;">Calendar</span>
+            <span class="mono" style="font-size: 10px; color: #A8A199; margin-left: auto;">now</span>
+          </div>
+          <span style="font-size: 12.5px; color: #37342E; line-height: 1.4;">Thursday 2:15 PM is already on your calendar.</span>
+        </div>
+
+        <div style="background: #F5F2EE; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 17px; height: 17px; border-radius: 5px; background: #C4BDB3; display: flex; align-items: center; justify-content: center;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>
+            </div>
+            <span style="font-size: 11px; color: #6B655D;">Mail</span>
+            <span class="mono" style="font-size: 10px; color: #A8A199; margin-left: auto;">now</span>
+          </div>
+          <span style="font-size: 12.5px; color: #37342E; line-height: 1.4;">Receipt and welcome note already sent to Maria.</span>
+        </div>
+
+        <div style="margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 5px; padding-bottom: 8px;">
+          <span class="mono" style="font-size: 10px; letter-spacing: 0.12em; color: #0B7A3E;">● NOT A MOCKUP</span>
+          <span style="font-size: 11px; color: #A8A199;">Your real phone. Your real number.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

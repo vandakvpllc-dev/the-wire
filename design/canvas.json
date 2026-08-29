@@ -1,0 +1,19 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Step 1 — The Five Boxes", "x": 0, "y": 0, "w": 1440, "h": 900 },
+    { "file": "Act1Diagnosis.dc.html", "title": "Step 2 — What You Have Now", "x": 1600, "y": 0, "w": 1440, "h": 900 },
+    { "file": "Act2Anatomy.dc.html", "title": "Step 3 — How It Works", "x": 3200, "y": 0, "w": 1440, "h": 900 },
+    { "file": "Act3Live.dc.html", "title": "Step 4 — +$250", "x": 4800, "y": 0, "w": 1440, "h": 900 },
+    { "file": "Act4Proof.dc.html", "title": "Step 5 — The Difference", "x": 6400, "y": 0, "w": 1440, "h": 900 },
+    { "file": "Blueprint.dc.html", "title": "Blueprint — how it's built", "x": 2400, "y": 1150, "w": 1440, "h": 1120 }
+  ],
+  "annotations": [
+    { "id": "step-1", "x": 0, "y": -150, "w": 460, "text": "STEP 1 — ONBOARDING\nFive boxes, thirty seconds: name, email, mobile, what they sell, what they charge. The price box is the one that makes everything after this personal — and green." },
+    { "id": "step-2", "x": 1600, "y": -150, "w": 460, "text": "STEP 2 — DIAGNOSIS\nTheir own business, drawn as disconnected parts. The payment link shows +$250 arriving and a red line underneath: then absolutely nothing." },
+    { "id": "step-3", "x": 3200, "y": -150, "w": 460, "text": "STEP 3 — THE TEACHING\nThe five parts every AI system has. Then the reveal: ChatGPT is part three, and only part three." },
+    { "id": "step-4", "x": 4800, "y": -150, "w": 460, "text": "STEP 4 — THE MOMENT\nThey buy from themselves in test mode. Green pulse travels the wire, the log prints every step, and +$250.00 lands on their phone at the same instant." },
+    { "id": "step-5", "x": 6400, "y": -150, "w": 460, "text": "STEP 5 — THE DIFFERENCE\nSame $250, two worlds. The money row is the closer: $250 today either way, then $0 on Wednesday vs +$250 on Wednesday." },
+    { "id": "blueprint-note", "x": 2400, "y": 1010, "w": 540, "text": "FOR VANDA, NOT FOR THEM\nEnd-to-end flow, the folder in plain English, and real running costs. Read the green box — that's why you can hand this to a thousand strangers and nobody is charged a cent." }
+  ],
+  "launch": { "view": "canvas" }
+}

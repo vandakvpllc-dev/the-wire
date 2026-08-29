@@ -1,69 +1,79 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+import { useCallback, useRef, useState } from "react";
+import { Form } from "@/components/Form";
+import { Diagnosis } from "@/components/Diagnosis";
+import { Anatomy } from "@/components/Anatomy";
+import { Live } from "@/components/Live";
+import { Proof } from "@/components/Proof";
+import { fallback } from "@/lib/personalize";
+import type { Answers, Personalized } from "@/lib/types";
+
+type Stage = "form" | "diagnosis" | "anatomy" | "live" | "proof";
+
+export default function Page() {
+  const [stage, setStage] = useState<Stage>("form");
+  const [answers, setAnswers] = useState<Answers | null>(null);
+  const [copy, setCopy] = useState<Personalized | null>(null);
+
+  /**
+   * Their copy is written while they read the diagnosis and the anatomy —
+   * roughly forty seconds of runway — so the trigger never waits on a model.
+   */
+  const pending = useRef<Promise<Personalized> | null>(null);
+
+  const start = useCallback((a: Answers) => {
+    setAnswers(a);
+    setStage("diagnosis");
+
+    pending.current = (async () => {
+      try {
+        const res = await fetch("/api/start", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            answers: a,
+            source: new URLSearchParams(window.location.search).get("from") ?? "",
+          }),
+        });
+        if (!res.ok) throw new Error(`start ${res.status}`);
+        const data = (await res.json()) as { copy: Personalized };
+        return data.copy;
+      } catch (e) {
+        console.error("[the-wire] start failed, using fallback", e);
+        return fallback(a);
+      }
+    })();
+
+    pending.current.then(setCopy);
+  }, []);
+
+  const toLive = useCallback(async () => {
+    if (!answers) return;
+    // Practically always already resolved; this is the seatbelt.
+    const c = copy ?? (await (pending.current ?? Promise.resolve(fallback(answers))));
+    setCopy(c);
+    setStage("live");
+  }, [answers, copy]);
+
+  const restart = useCallback(() => {
+    setAnswers(null);
+    setCopy(null);
+    pending.current = null;
+    setStage("form");
+  }, []);
+
+  if (stage === "form" || !answers) return <Form onSubmit={start} />;
+
+  if (stage === "diagnosis") {
+    return <Diagnosis a={answers} onNext={() => setStage("anatomy")} />;
+  }
+
+  if (stage === "anatomy") return <Anatomy a={answers} onNext={toLive} />;
+
+  if (stage === "live" && copy) {
+    return <Live a={answers} copy={copy} onNext={() => setStage("proof")} />;
+  }
+
+  return <Proof a={answers} onRestart={restart} />;
 }
